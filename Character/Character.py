@@ -26,24 +26,24 @@ class Character():
             self.level += 1
 
         # These stats are doubled (arbitrary)
-        self.health *= 2
-        self.shield *= 2
-        self.mana *= 2
-        self.damageMin *= 2
-        self.damageMax *= 2
+        self.health *= 1.2
+        self.shield *= 1.2
+        self.mana *= 1.2
+        self.damageMin *= 1.2
+        self.damageMax *= 1.2
 
         # These stats are doubled (arbitrary) whithout exceed 20 % (of the stat)
-        if(self.dodge < 10):
-            self.dodge *= 2
+        if(self.dodge < 20/1*2):
+            self.dodge *= 1.2
 
-        if(self.parry < 10):
-            self.parry *= 2
+        if(self.parry < 20/1*2):
+            self.parry *= 1.2
         
-        if(self.criticalHit < 10):
-            self.criticalHit *= 2
+        if(self.criticalHit < 20/1*2):
+            self.criticalHit *= 1.2
         
-        if(self.armor < 10):
-            self.armor *= 2
+        if(self.armor < 20/1*2):
+            self.armor *= 1.2
 
     """ 
     This method is called when the character killed
@@ -60,6 +60,8 @@ class Character():
                 18:750000, 19:1000000, 20:2500000}
 
         # We verify for each lvl above current level if we have enougth xp to levelup
-        while self.xp - lvl_xp[self.level + 1] > 0:
+        xp_temp = self.xp
+        while xp_temp - lvl_xp[self.level + 1] > 0:
             if (self.xp >= lvl_xp[self.level + 1]):
                 self.levelUp()
+                xp_temp -= lvl_xp[self.level + 1]
