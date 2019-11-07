@@ -42,3 +42,22 @@ class Character():
         
         if(self.armor < 10):
             self.armor *= 2
+
+    """ 
+    This method is called when the character killed
+    monsters and he earn some xp
+    """
+    def addXp(self, xp):
+        self.xp += xp
+
+        # This dict corresponds for each level its xp to reach it
+        lvl_xp = {1:0, 2:50, 3:100, 4:250, 5:500,
+                6:750, 7:1000, 8:2500, 9:5000,
+                10:7500, 11:10000, 12:25000, 13:50000,
+                14:75000, 15:100000, 16:250000, 17:500000,
+                18:750000, 19:1000000, 20:2500000}
+
+        # We verify for each lvl above current level if we have enougth xp to levelup
+        for i in range(self.level,21):
+            if (self.xp >= lvl_xp[self.level + 1]):
+                self.levelUp()
