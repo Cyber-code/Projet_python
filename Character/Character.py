@@ -35,16 +35,16 @@ class Character():
         self.damageMax = int(croissance*self.damageMax)
 
         # These stats are inscrease (arbitrary) whithout exceed 20 (of the stat)
-        if(self.dodge < 20/1*2):
+        if(self.dodge < 20/croissance):
             self.dodge = int(croissance*self.dodge)
 
-        if(self.parry < 20/1*2):
+        if(self.parry < 20/croissance):
             self.parry = int(croissance*self.parry)
         
-        if(self.criticalHit < 20/1*2):
+        if(self.criticalHit < 20/croissance):
             self.criticalHit = int(croissance*self.criticalHit)
         
-        if(self.armor < 20/1*2):
+        if(self.armor < 20/croissance):
             self.armor = int(croissance*self.armor)
 
     """ 
