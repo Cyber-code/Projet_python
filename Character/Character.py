@@ -25,25 +25,25 @@ class Character():
         if self.level < self.max_level:
             self.level += 1
 
-        # These stats are doubled (arbitrary)
-        self.health *= 1.2
-        self.shield *= 1.2
-        self.mana *= 1.2
-        self.damageMin *= 1.2
-        self.damageMax *= 1.2
+        # These stats are increase about 20% (arbitrary)
+        self.health = int(1.2*self.health)
+        self.shield = int(1.2*self.shield)
+        self.mana = int(1.2*self.mana)
+        self.damageMin = int(1.2*self.damageMin)
+        self.damageMax = int(1.2*self.damageMax)
 
-        # These stats are doubled (arbitrary) whithout exceed 20 % (of the stat)
+        # These stats are doubled (arbitrary) whithout exceed 20 (of the stat)
         if(self.dodge < 20/1*2):
-            self.dodge *= 1.2
+            self.dodge = int(1.2*self.dodge)
 
         if(self.parry < 20/1*2):
-            self.parry *= 1.2
+            self.parry = int(1.2*self.parry)
         
         if(self.criticalHit < 20/1*2):
-            self.criticalHit *= 1.2
+            self.criticalHit = int(1.2*self.criticalHit)
         
         if(self.armor < 20/1*2):
-            self.armor *= 1.2
+            self.armor = int(1.2*self.armor)
 
     """ 
     This method is called when the character killed
