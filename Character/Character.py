@@ -6,22 +6,24 @@ class Character():
         self.name = name
         self.health = health
         self.shield = shield    
-        self.dodge = dodge      # Chance of dodge (%) to avoid attacks (damages are nullfied)
-        self.parry = parry      # Change of parry (%) to reduce amount of damage by 70%
+        self.dodge = dodge              # Chance of dodge (%) to avoid attacks (damages are nullfied)
+        self.parry = parry              # Change of parry (%) to reduce amount of damage by 70%
         self.criticalHit = criticalHit  # Chance of critical hit (%) to double the amount of damage inflicted
-        self.mana = mana        # Magic point, to use spells
+        self.mana = mana                # Magic point, to use spells
         self.damageMin = damageMin      # Mininum damage that the character is able to inflict
         self.damageMax = damageMax      # Maximum damage "                                   "
-        self.armor = armor      # Armor point, reduced incoming damage by a percentage
-        self.level = level      # Level, each leave increase a small of the characteristics above
-        self.xp = xp            # Experience bar, when filled, increase cureent level by one
+        self.armor = armor              # Armor point, reduced incoming damage by a percentage
+        self.level = level              # Level, each leave increase a small of the characteristics above
+        self.xp = xp                    # Experience bar, when filled, increase cureent level by one
+        self.max_level = 21
 
 
     """ Methods """
 
     """ When the character earned enought xp, he gained a level """
     def levelUp(self):
-        self.level += 1
+        if self.level < self.max_level:
+            self.level += 1
 
         # These stats are doubled (arbitrary)
         self.health *= 2
@@ -58,6 +60,6 @@ class Character():
                 18:750000, 19:1000000, 20:2500000}
 
         # We verify for each lvl above current level if we have enougth xp to levelup
-        for i in range(self.level,21):
+        while self.xp - lvl_xp[self.level + 1] > 0:
             if (self.xp >= lvl_xp[self.level + 1]):
                 self.levelUp()
