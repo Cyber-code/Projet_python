@@ -24,26 +24,28 @@ class Character():
     def levelUp(self):
         if self.level < self.max_level:
             self.level += 1
+        
+        croissance = 1.2
 
         # These stats are increase about 20% (arbitrary)
-        self.health = int(1.2*self.health)
-        self.shield = int(1.2*self.shield)
-        self.mana = int(1.2*self.mana)
-        self.damageMin = int(1.2*self.damageMin)
-        self.damageMax = int(1.2*self.damageMax)
+        self.health = int(croissance*self.health)
+        self.shield = int(croissance*self.shield)
+        self.mana = int(croissance*self.mana)
+        self.damageMin = int(croissance*self.damageMin)
+        self.damageMax = int(croissance*self.damageMax)
 
-        # These stats are doubled (arbitrary) whithout exceed 20 (of the stat)
+        # These stats are inscrease (arbitrary) whithout exceed 20 (of the stat)
         if(self.dodge < 20/1*2):
-            self.dodge = int(1.2*self.dodge)
+            self.dodge = int(croissance*self.dodge)
 
         if(self.parry < 20/1*2):
-            self.parry = int(1.2*self.parry)
+            self.parry = int(croissance*self.parry)
         
         if(self.criticalHit < 20/1*2):
-            self.criticalHit = int(1.2*self.criticalHit)
+            self.criticalHit = int(croissance*self.criticalHit)
         
         if(self.armor < 20/1*2):
-            self.armor = int(1.2*self.armor)
+            self.armor = int(croissance*self.armor)
 
     """ 
     This method is called when the character killed
