@@ -1,3 +1,7 @@
+#import sys
+#sys.path.append('/Inventory')
+#from Inventory import *
+
 class Character():
     """ Constructor """
     def __init__(self, name, health, shield, dodge,
@@ -16,6 +20,8 @@ class Character():
         self.level = level              # Level, each leave increase a small of the characteristics above
         self.xp = xp                    # Experience bar, when filled, increase cureent level by one
         self.max_level = 21
+
+        self.inventory = Inventory([], 0, None, None, None, None, None, None, None, None, None)
 
 
     """ Methods """
