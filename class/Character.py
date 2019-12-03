@@ -1,7 +1,6 @@
 import Inventory
 
-class Character():
-    """ Constructor """
+class Character:
     def __init__(self, name, health, shield, dodge,
                  parry, criticalHit, mana, damageMin,
                  damageMax, armor, level, xp):

@@ -1,3 +1,5 @@
+import Object
+
 class Inventory:
     def __init__(self, objects, gold, leftHand, rigthHand, jewel1, jewel2, headArmor, chestArmor, pantsArmor, armsArmor, legsArmor):
         self.objects = objects  # objects is a list of weapons, jewels and armors
