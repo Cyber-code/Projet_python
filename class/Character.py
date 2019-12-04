@@ -24,7 +24,7 @@ class Character:
     """ Methods """
 
     def showInfo(self):
-        return "Character" + "\nName: "+ self.name + "\nHealth: "+str(self.health)+" PV"  +"\nShield: "+str(self.shield) + "\nDodge: "+str(self.dodge)+" %" + "\nParry: "+str(self.parry)+" %"  + "\nCritical Hit: "+str(self.criticalHit)+" %" + "\nMana: "+str(self.mana)+" MP" + "\nMinimum Damage: "+str(self.damageMin) + "\nMaximum Damage: "+str(self.damageMax) + "\nArmor: "+str(self.armor)+" AP" + "\nLevel: "+str(self.level)+" lvl" + "\nExperience: "+str(self.xp)+" xp" + "\nLevel Max: "+str(self.max_level) + "\nInventory: "+str(self.inventory) + "\n"
+        return "\nName: "+ self.name + "\nHealth: "+str(self.health)+" PV"  +"\nShield: "+str(self.shield) + "\nDodge: "+str(self.dodge)+" %" + "\nParry: "+str(self.parry)+" %"  + "\nCritical Hit: "+str(self.criticalHit)+" %" + "\nMana: "+str(self.mana)+" MP" + "\nMinimum Damage: "+str(self.damageMin) + "\nMaximum Damage: "+str(self.damageMax) + "\nArmor: "+str(self.armor)+" AP" + "\nLevel: "+str(self.level)+" lvl" + "\nExperience: "+str(self.xp)+" xp" + "\nLevel Max: "+str(self.max_level) + "\nInventory: "+str(self.inventory) + "\n"
 
     """ When the character earned enought xp, he gained a level """
     def levelUp(self):
