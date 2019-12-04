@@ -1,9 +1,9 @@
-import Inventory
+from Inventory import Inventory
 
 class Character:
     def __init__(self, name, health, shield, dodge,
                  parry, criticalHit, mana, damageMin,
-                 damageMax, armor, level, xp):
+                 damageMax, armor, level, xp, inventory):
         self.name = name
         self.health = health
         self.shield = shield    
@@ -18,7 +18,7 @@ class Character:
         self.xp = xp                    # Experience bar, when filled, increase cureent level by one
         self.max_level = 21
 
-        self.inventory = Inventory.Inventory([], 0, None, None, None, None, None, None, None, None, None)
+        self.inventory = inventory
 
 
     """ Methods """
