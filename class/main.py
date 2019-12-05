@@ -3,6 +3,8 @@ from Consumable import Consumable
 from Weapon import Weapon
 from Player import Player
 from Jewels import Jewels
+from Armor import Armor
+from Monster import Monster
 
 def main():
     """
@@ -37,5 +39,25 @@ def main():
     print("-------------------------Test Jewel----------------------------")
     jewels = Jewels()
     print(jewels.showInfo())
+
+    print("-------------------------Test Armor----------------------------")
+    armor = Armor(name="Diamond Helmet", value=1000, armor=50, armorType="head")
+    print(armor.showInfo())
+
+    print(player.showInventory())
+
+    player.addItem(bottle)
+
+    player.addItem(armor)
+
+    player.addItem(jewels)
+
+    player.addItem(woodenSword)
+
+    print(player.showInventory())
+
+    print("-------------------------Test Monster----------------------------")
+    monster = Monster()
+    print(monster.showInfo())
 
 main()
