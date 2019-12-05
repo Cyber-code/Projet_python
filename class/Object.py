@@ -1,3 +1,4 @@
+""" Object class is the super class of Consumable and Equipement classes"""
 class Object:
     def __init__(self, name, value):
         self.name = name
