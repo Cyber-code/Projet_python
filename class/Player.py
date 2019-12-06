@@ -5,10 +5,10 @@ from Inventory import Inventory
 class Player(Character):
     def __init__(self, name="Player", health=20, shield=0, dodge=0,
                  parry=0, criticalHit=1, mana=10, damageMin=1,
-                 damageMax=2, armor=0, level=1, xp=0, inventory=Inventory(),
-                 maxHealth=20):
+                 damageMax=2, armor=0, level=1, xp=0, inventory=Inventory()):
         Character.__init__(self, name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, level, xp, inventory)
-        self.maxHealth = maxHealth
+        self.maxHealth = health
+        self.maxMana = mana
 
     """ When the player uses a consumable which regerate his health """
     def addHealth(self, health):
@@ -20,6 +20,13 @@ class Player(Character):
     """ This method is used to add an item/object to the player's inventory """
     def addItem(self, item):
         self.inventory.objects.append(item)
+
+    """ When the player uses a consumable which regerate his mana (magic points) """
+    def addMana(self, mana):
+        if(self.mana + mana >= self.maxMana):
+            self.mana = self.maxMana
+        else:
+            self.mana += mana
 
     """ 
     This method is called when the player killed
@@ -202,3 +209,6 @@ class Player(Character):
                 objects += "Error: ObjectType not implemented)"
 
         return "\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name) + "\nGold: "+ str(self.inventory.gold) + leftHand + rightHand + jewel1 + jewel2 + headArmor + chestArmor + armsArmor + legsArmor + feetArmor + objects + "\n" + "".join(["-" for i in range(len("\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name))-1)])
+
+    def showBars(self):
+        return "\n" + self.name + "\nHearth: {} / {}".format(self.health, self.maxHealth) + "\nMana: {} / {}".format(self.mana, self.maxMana)

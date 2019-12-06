@@ -64,4 +64,6 @@ def main():
 
     print(player.showInventory())
 
+    print(player.showBars())
+
 main()
