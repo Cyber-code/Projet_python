@@ -8,8 +8,8 @@ class Armor(Equipement):
 
         Equipement.__init__(self, name, value)
         self.armor = armor
-        self.armorType = armorType # This parameter is used to specify where the player have to wear this armor (head, chest, arms, legs, feet)
+        self.type = armorType # This parameter is used to specify where the player have to wear this armor (head, chest, arms, legs, feet)
 
 
     def showInfo(self):
-        return "\nArmor: " + Equipement.showInfo(self) + "\n{} armor protection: +".format(self.armorType.capitalize()) + str(self.armor)+" %" + "\n"
+        return "\nArmor: " + Equipement.showInfo(self) + "\n{} armor protection: +".format(self.type.capitalize()) + str(self.armor)+" %" + "\n"

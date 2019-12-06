@@ -60,4 +60,8 @@ def main():
     monster = Monster()
     print(monster.showInfo())
 
+    player.setLeftWeapon(woodenSword)
+
+    print(player.showInventory())
+
 main()

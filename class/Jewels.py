@@ -8,6 +8,8 @@ class Jewels(Equipement):
         self.parry = parry
         self.criticalHit = criticalHit
         self.maxHealth = maxHealth
+        
+        self.type = "jewel"
 
 
     def showInfo(self):

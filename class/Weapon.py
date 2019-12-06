@@ -5,6 +5,8 @@ class Weapon(Equipement):
     def __init__(self, name="Wooden stick", value=0, damage=2):
         Equipement.__init__(self, name, value)
         self.damage = damage
+        
+        self.type = "weapon"
 
 
     def showInfo(self):

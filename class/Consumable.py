@@ -9,6 +9,8 @@ class Consumable(Object):
         self.mana = mana
         self.xp = xp
 
+        self.type = "consumable"
+
 
     def showInfo(self):
         return "\nConsumable: " + Object.showInfo(self) + "\nHealth: +"+ str(self.health)+" PV" + "\nShield: +"+str(self.shield) + "\nMana: +"+str(self.mana) + "\nXp: +"+str(self.xp) +"\n"
