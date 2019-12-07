@@ -69,11 +69,20 @@ class Character:
 
     """ This method calculate the getting amount of damages """
     def getDamages(self, damages):
+        if(randint(0, 100) <= self.dodge):
+            damages = 0
+            print(self.name + " dodges the attack.")
+        elif(randint(0, 100) <= self.parry):
+            damages = int(damages * 0.3)
+            print(self.name + " parries the attack, damages are reduced by 70 %.")
+
         if(self.shield - damages < 0):
             self.health = self.health - (damages - self.shield)
             self.shield = 0
         else:
             self.shield -= damages
+
+        return self.isAlive()
 
 
     def isAlive(self):

@@ -8,17 +8,10 @@ from Monster import *
 
 def main():
     #name = input("Enter your player's name : ")
-    player = Player(name="Nico")
+    player = Player(name="Nico", dodge=25, parry=25)
     print(player.showInfo())
 
-    player.getDamages(40)
+    player.getDamages(10)
     print(player.showBars())
-    print("Alive:", player.isAlive())
-    
-    for i in range(32):
-        player.getDamages(1)
-        print(player.showBars())
-        print("Alive:", player.isAlive())
-    
 
 main()
