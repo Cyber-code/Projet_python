@@ -14,3 +14,16 @@ class Jewels(Equipement):
 
     def showInfo(self):
         return "\nJewel: " + Equipement.showInfo(self) + "\nDodge: +" + str(self.dodge)+" %" + "\nParry: +" + str(self.parry)+" %" + "\nCritical hit: +" + str(self.criticalHit)+" %"+ "\nMaximum Health: +" + str(self.maxHealth)+" %" + "\n"
+
+
+def generateStrengthNecklace():
+    return Jewels(name="Strength necklace", value=50, criticalHit=10)
+
+def generateResistanceNecklace():
+    return Jewels(name="Resistance necklace", value=50, parry=10)
+
+def generateAnticipationNecklace():
+    return Jewels(name="Anticipation necklace", value=50, dodge=10)
+
+def generateHealthNecklace():
+    return Jewels(name="Health necklace", value=50, maxHealth=10)
