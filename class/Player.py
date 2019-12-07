@@ -1,5 +1,6 @@
 from Character import Character
 from Inventory import Inventory
+from math import sqrt
 
 """ Player class instantiate a player object controled by the user """
 class Player(Character):
@@ -33,32 +34,39 @@ class Player(Character):
         else:
             self.shield += shield
 
-    """ When the player earned enought xp, he gained a level """
+    """ 
+    This method is called when the player killed
+    monsters and he earn some xp
+    """
+    def addXp(self, xp):
+        level = self.level
+        self.xp += xp
+        # From lvl 0 to 16
+        if(self.xp < 353):
+            self.level = int((-6 + sqrt(36+4*self.xp))//2)
+        # From lvl 17 to 31
+        elif(self.xp < 1508):
+            self.level = int((40.5 + sqrt((40.5)**2 -3600 + 10*self.xp))//5)
+        # From 32 to ...
+        else:
+            self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
+
+        if (level < self.level):
+            self.levelUp()
+
+
+    """ Only for the player, when he earns enought xp, then he gains a level """
     def levelUp(self):
-        if self.level < self.maxLevel:
-            self.level += 1
-        
-        croissance = 1.2
-
-        # These stats are increase about 20% (arbitrary)
-        self.maxHealth = int(croissance*self.maxHealth)
-        self.health = int(croissance*self.health)
-        self.maxShield = int(croissance*self.maxShield)
-        self.shield = int(croissance*self.shield)
-        self.maxMana = int(croissance*self.maxMana)
-        self.mana = int(croissance*self.mana)
-        self.damageMin = int(croissance*self.damageMin)
-        self.damageMax = int(croissance*self.damageMax)
-
-        # These stats are inscrease (arbitrary) whithout exceed 20 (of the stat)
-        if(self.dodge < 20/croissance):
-            self.dodge = int(croissance*self.dodge)
-
-        if(self.parry < 20/croissance):
-            self.parry = int(croissance*self.parry)
-        
-        if(self.criticalHit < 20/croissance):
-            self.criticalHit = int(croissance*self.criticalHit)
-        
-        if(self.armor < 20/croissance):
-            self.armor = int(croissance*self.armor)
+        factor = 1.2
+        self.maxHealth = int(factor*self.maxHealth)
+        self.health = int(factor*self.health)
+        self.maxShield = int(factor*self.maxShield)
+        self.shield = int(factor*self.shield)
+        self.maxMana = int(factor*self.maxMana)
+        self.mana = int(factor*self.mana)
+        self.damageMin += 1
+        self.damageMax += 1
+        self.dodge += 1
+        self.parry += 1
+        self.criticalHit += 1
+        self.armor += 1

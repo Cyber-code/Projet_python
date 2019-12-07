@@ -67,6 +67,7 @@ class Character:
             damages *= 2
         return damages
 
+
     """ Methods which modify inventory's organisation """
 
     def setLeftWeapon(self, item):
