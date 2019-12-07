@@ -11,14 +11,14 @@ def main():
     player = Player(name="Nico")
     print(player.showInfo())
 
-    jewel1 = generateStrengthNecklace()
-    print(jewel1.showInfo())
-    jewel2 = generateResistanceNecklace()
-    print(jewel2.showInfo())
-    jewel3 = generateAnticipationNecklace()
-    print(jewel3.showInfo())
-    jewel4 = generateHealthNecklace()
-    print(jewel4.showInfo())
-
+    player.getDamages(40)
+    print(player.showBars())
+    print("Alive:", player.isAlive())
+    
+    for i in range(32):
+        player.getDamages(1)
+        print(player.showBars())
+        print("Alive:", player.isAlive())
+    
 
 main()

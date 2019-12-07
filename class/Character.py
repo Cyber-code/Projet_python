@@ -25,7 +25,6 @@ class Character:
         self.maxShield = shield
         self.maxMana = mana
 
-        self.isAlive = True
         self.addXp(xp) # To update the level in function of xp
 
     """ 
@@ -66,6 +65,22 @@ class Character:
         if (randint(0, 100) <= self.criticalHit):
             damages *= 2
         return damages
+
+
+    """ This method calculate the getting amount of damages """
+    def getDamages(self, damages):
+        if(self.shield - damages < 0):
+            self.health = self.health - (damages - self.shield)
+            self.shield = 0
+        else:
+            self.shield -= damages
+
+
+    def isAlive(self):
+        if self.health > 0:
+            return True
+        else:
+            return False
 
 
     """ Methods which modify inventory's organisation """
