@@ -3,7 +3,7 @@ from Consumable import *
 from Weapon import *
 from Player import Player
 from Jewels import Jewels
-from Armor import Armor
+from Armor import *
 from Monster import *
 
 def main():
@@ -11,16 +11,20 @@ def main():
     player = Player(name="Nico")
     print(player.showInfo())
 
-    conso =  generatePotionHealing()
-    print(conso.showInfo())
-    conso2 = generatePotionMana()
-    print(conso2.showInfo())
-    conso3 = generatePotionRegeneration()
-    print(conso3.showInfo())
-    conso4 = generatShieldPiece()
-    print(conso4.showInfo())
-    conso5 = generateKnowledgeBook()
-    print(conso5.showInfo())
+    helmet = generateLeatherHelmet()
+    print(helmet.showInfo())
+
+    chestplate = generateDiamondChestplate()
+    print(chestplate.showInfo())
+
+    armsProtection = generateChainmailArmsProtection()
+    print(armsProtection.showInfo())
+
+    leggings = generateIronLeggings()
+    print(leggings.showInfo())
+
+    boots = generateGoldenBoots()
+    print(boots.showInfo())
 
 
 main()
