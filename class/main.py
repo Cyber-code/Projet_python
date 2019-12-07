@@ -1,5 +1,5 @@
 from Inventory import Inventory
-from Consumable import Consumable
+from Consumable import *
 from Weapon import *
 from Player import Player
 from Jewels import Jewels
@@ -9,28 +9,18 @@ from Monster import *
 def main():
     #name = input("Enter your player's name : ")
     player = Player(name="Nico")
-
     print(player.showInfo())
 
-    weapon = generateWoodenSword()
-    print(weapon.showInfo())
+    conso =  generatePotionHealing()
+    print(conso.showInfo())
+    conso2 = generatePotionMana()
+    print(conso2.showInfo())
+    conso3 = generatePotionRegeneration()
+    print(conso3.showInfo())
+    conso4 = generatShieldPiece()
+    print(conso4.showInfo())
+    conso5 = generateKnowledgeBook()
+    print(conso5.showInfo())
 
-    weapon1 = generateGoldenSword()
-    print(weapon1.showInfo())
-
-    weapon2 = generateStoneSword()
-    print(weapon2.showInfo())
-
-    weapon3 = generateIronSword()
-    print(weapon3.showInfo())
-
-    weapon4 = generateDiamondSword()
-    print(weapon4.showInfo())
-
-    weapon5 = generateBow()
-    print(weapon5.showInfo())
-
-    weapon6 = generateCrossbow()
-    print(weapon6.showInfo())
 
 main()
