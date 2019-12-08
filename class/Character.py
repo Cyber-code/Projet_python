@@ -1,6 +1,7 @@
 from Inventory import Inventory
 from random import randint
 from math import sqrt
+from Spell import Spell
 
 class Character:
     def __init__(self, name, health, shield, dodge,
@@ -51,19 +52,20 @@ class Character:
         damages += randint(self.damageMin, self.damageMax)
         if (randint(0, 100) <= self.criticalHit):
             damages *= 2
+            print("Critical hit !")
         return damages
 
     """ This method selects spell and calculates its damages """
-    def throwSpell(self, mana):
-        damages = int()
-        if (0 < mana <= self.mana):
-            damages += mana // 2 #  Spell damages are equals to the half of mana used
-            self.mana -= mana
+    def throwSpell(self, spell):
+        damages = spell.damage
+        if (0 < spell.mana <= self.mana):
+            self.mana -= spell.mana
         else:
             print("\nNot enought mana !\n")
 
         if (randint(0, 100) <= self.criticalHit):
             damages *= 2
+            print("Critical hit !")
         return damages
 
 

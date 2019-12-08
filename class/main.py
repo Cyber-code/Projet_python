@@ -12,7 +12,7 @@ def main():
     player = Player(name="Nico")
     print(player.showInfo())
 
-    spell = generateFireball()
-    print(spell.showInfo())
+    print(player.throwSpell(generateFireball()))
+    print(player.showBars())
 
 main()
