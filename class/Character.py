@@ -96,29 +96,32 @@ class Character:
 
     """ Methods which modify inventory's organisation """
 
-    def setLeftWeapon(self, item):
-        if (self.inventory.weapon["leftHand"] != None):
-            self.inventory.objects.append(self.inventory.weapon["leftHand"]) # Replace the actual left weapon to the inventory (player's list of objects)
-        if (item.type == "weapon"):
-            self.inventory.weapon["leftHand"] = item # Set the new left weapon
+    def setWeapon(self, item, hand="leftHand"):
+        if (item.type == "weapon" and hand in ["leftHand", "rightHand"]):
+            if (self.inventory.weapon[hand] != None):
+                self.inventory.objects.append(self.inventory.weapon[hand]) # Replace the actual left or right weapon to the inventory (player's list of objects)
 
-    def setRightWeapon(self, item):
-        if (self.inventory.weapon["rightHand"] != None):
-            self.inventory.objects.append(self.inventory.weapon["rightHand"]) # Replace the actual right weapon to the inventory (player's list of objects)
-        if (item.type == "weapon"):
-            self.inventory.weapon["rightHand"] = item # Set the new right weapon
+            self.inventory.weapon[hand] = item # Set the new left or right weapon
+            return True
+        else:
+            return False
 
-    def setJewel1(self, item):
-        if (self.inventory.jewels["jewel1"] != None):
-            self.inventory.objects.append(self.inventory.jewels["jewel1"]) # Replace the actual jewel1 to the inventory (player's list of objects)
+
+    def setJewel(self, item, slot="jewel1"):
+        if (self.inventory.jewels[slot] != None):
+            # Restore the default character parameters
+            self.dodge -= self.inventory.jewels[slot].dodge
+            self.parry -= self.inventory.jewels[slot].parry
+            self.criticalHit -= self.inventory.jewels[slot].criticalHit
+            self.maxHealth -= self.inventory.jewels[slot].maxHealth
+            self.inventory.objects.append(self.inventory.jewels[slot]) # Replace the actual jewel to the inventory (player's list of objects)
         if (item.type == "jewel"):
-            self.inventory.jewels["jewel1"] = item # Set the new jewel1
-
-    def setJewel2(self, item):
-        if (self.inventory.jewels["jewel2"] != None):
-            self.inventory.objects.append(self.inventory.jewels["jewel2"]) # Replace the actual jewel2 to the inventory (player's list of objects)
-        if (item.type == "jewel"):
-            self.inventory.jewels["jewel2"] = item # Set the new jewel2
+            # Set the new character parameters
+            self.inventory.jewels[slot] = item # Set the new jewel
+            self.dodge += self.inventory.jewels[slot].dodge
+            self.parry += self.inventory.jewels[slot].parry
+            self.criticalHit += self.inventory.jewels[slot].criticalHit
+            self.maxHealth += self.inventory.jewels[slot].maxHealth
 
     def setHeadArmor(self, item):
         if (self.inventory.armor["head"] != None):

@@ -12,7 +12,13 @@ def main():
     player = Player(name="Nico")
     print(player.showInfo())
 
-    print(player.throwSpell(generateFireball()))
-    print(player.showBars())
+    weapon = generateBow()
+    weapon2 = generateCrossbow()
+    print(player.showInventory())
+    print(player.setWeapon(weapon, hand="leftHand"))
+    print(player.showInventory())
+    print(player.setWeapon(weapon2, hand="rightHand"))
+    print(player.showInventory())
+
 
 main()
