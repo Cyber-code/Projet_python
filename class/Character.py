@@ -108,20 +108,25 @@ class Character:
 
 
     def setJewel(self, item, slot="jewel1"):
-        if (self.inventory.jewels[slot] != None):
-            # Restore the default character parameters
-            self.dodge -= self.inventory.jewels[slot].dodge
-            self.parry -= self.inventory.jewels[slot].parry
-            self.criticalHit -= self.inventory.jewels[slot].criticalHit
-            self.maxHealth -= self.inventory.jewels[slot].maxHealth
-            self.inventory.objects.append(self.inventory.jewels[slot]) # Replace the actual jewel to the inventory (player's list of objects)
-        if (item.type == "jewel"):
+        if (item.type == "jewel" and slot in ["jewel1", "jewel2"]):
+            if (self.inventory.jewels[slot] != None):
+                # Restore the default character parameters
+                self.dodge -= self.inventory.jewels[slot].dodge
+                self.parry -= self.inventory.jewels[slot].parry
+                self.criticalHit -= self.inventory.jewels[slot].criticalHit
+                self.maxHealth -= self.inventory.jewels[slot].maxHealth
+                self.inventory.objects.append(self.inventory.jewels[slot]) # Replace the actual jewel to the inventory (player's list of objects)
+            
             # Set the new character parameters
             self.inventory.jewels[slot] = item # Set the new jewel
             self.dodge += self.inventory.jewels[slot].dodge
             self.parry += self.inventory.jewels[slot].parry
             self.criticalHit += self.inventory.jewels[slot].criticalHit
             self.maxHealth += self.inventory.jewels[slot].maxHealth
+            return True
+        else:
+            return False
+
 
     def setHeadArmor(self, item):
         if (self.inventory.armor["head"] != None):
@@ -181,7 +186,7 @@ class Character:
         else:
             jewel1 += self.inventory.jewels["jewel1"].name + " (" + str(self.inventory.jewels["jewel1"].value) + " gold, dodge: +" + str(self.inventory.jewels["jewel1"].dodge) + " %, parry: +" + str(self.inventory.jewels["jewel1"].parry) + " %, critical hit: +" + str(self.inventory.jewels["jewel1"].criticalHit) + " %, max health: +" + str(self.inventory.jewels["jewel1"].maxHealth) + " %)"
 
-        jewel2 = "  Jewel 2: "
+        jewel2 = "\nJewel 2: "
         if(self.inventory.jewels["jewel2"] == None):
             jewel2 += str(None)
         else:

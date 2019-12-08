@@ -12,13 +12,16 @@ def main():
     player = Player(name="Nico")
     print(player.showInfo())
 
-    weapon = generateBow()
-    weapon2 = generateCrossbow()
+    jewel = generateResistanceNecklace()
+    jewel2 = generateAnticipationNecklace()
     print(player.showInventory())
-    print(player.setWeapon(weapon, hand="leftHand"))
+    print(player.setJewel(jewel, slot="jewel1"))
     print(player.showInventory())
-    print(player.setWeapon(weapon2, hand="rightHand"))
+    print(player.setJewel(jewel2, slot="jewel2"))
     print(player.showInventory())
+    print(player.showInfo())
+    print(player.showInventory())
+    print(player.showInfo())
 
 
 main()
