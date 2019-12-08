@@ -43,8 +43,8 @@ class Character:
         else:
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
 
-    """ This method calculates damages of a Character """
-    def handAttack(self, hand):
+    """ This method calculates damages given by a Character """
+    def hit(self, hand):
         damages = int()
         if (hand in ["leftHand", "rightHand"] and self.inventory.weapon[hand] != None):
             damages += self.inventory.weapon[hand].damage
@@ -53,8 +53,8 @@ class Character:
             damages *= 2
         return damages
 
-    """ This method calculates spell damages """
-    def spellAttack(self, mana):
+    """ This method selects spell and calculates its damages """
+    def throwSpell(self, mana):
         damages = int()
         if (0 < mana <= self.mana):
             damages += mana // 2 #  Spell damages are equals to the half of mana used
