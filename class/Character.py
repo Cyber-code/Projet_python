@@ -78,6 +78,7 @@ class Character:
             damages = int(damages * 0.3)
             print(self.name + " parries the attack, damages are reduced by 70 %.")
 
+        damages = int(damages * (1 - self.armor/100))
         if(self.shield - damages < 0):
             self.health = self.health - (damages - self.shield)
             self.shield = 0

@@ -25,10 +25,12 @@ def main():
     player.setArmor(leggings)
     player.setArmor(boots)
 
-    player.setArmor(generateIronHelmet())
-
     print(player.showInfo())
     print(player.showInventory())
+
+    player.getDamages(100)
+    print(player.showBars())
+
 
 
 main()
