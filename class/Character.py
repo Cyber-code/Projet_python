@@ -115,10 +115,12 @@ class Character:
                 self.parry -= self.inventory.jewels[slot].parry
                 self.criticalHit -= self.inventory.jewels[slot].criticalHit
                 self.maxHealth -= self.inventory.jewels[slot].maxHealth
+
                 self.inventory.objects.append(self.inventory.jewels[slot]) # Replace the actual jewel to the inventory (player's list of objects)
             
-            # Set the new character parameters
             self.inventory.jewels[slot] = item # Set the new jewel
+            
+            # Set the new character parameters
             self.dodge += self.inventory.jewels[slot].dodge
             self.parry += self.inventory.jewels[slot].parry
             self.criticalHit += self.inventory.jewels[slot].criticalHit
@@ -127,36 +129,17 @@ class Character:
         else:
             return False
 
+    def setArmor(self, item):
+        if (item.type in ["head", "chest", "arms", "legs", "feet"]):
+            if (self.inventory.armor[item.type] != None):
+                self.armor -= self.inventory.armor[item.type].armor
+                self.inventory.objects.append(self.inventory.armor[item.type]) # Replace the actual armor to the inventory (player's list of objects)
+            self.inventory.armor[item.type] = item # Set the new armor
+            self.armor += self.inventory.armor[item.type].armor
+            return True
+        else:
+            return False
 
-    def setHeadArmor(self, item):
-        if (self.inventory.armor["head"] != None):
-            self.inventory.objects.append(self.inventory.armor["head"]) # Replace the actual head armor to the inventory (player's list of objects)
-        if (item.type == "head"):
-            self.inventory.armor["head"] = item # Set the new head armor
-
-    def setChestArmor(self, item):
-        if (self.inventory.armor["chest"] != None):
-            self.inventory.objects.append(self.inventory.armor["chest"]) # Replace the actual chest armor to the inventory (player's list of objects)
-        if (item.type == "chest"):
-            self.inventory.armor["chest"] = item # Set the new chest armor
-
-    def setArmsArmor(self, item):
-        if (self.inventory.armor["arms"] != None):
-            self.inventory.objects.append(self.inventory.armor["arms"]) # Replace the actual arms armor to the inventory (player's list of objects)
-        if (item.type == "arms"):
-            self.inventory.armor["arms"] = item # Set the new arms armor
-
-    def setLegsArmor(self, item):
-        if (self.inventory.armor["legs"] != None):
-            self.inventory.objects.append(self.inventory.armor["legs"]) # Replace the actual legs armor to the inventory (player's list of objects)
-        if (item.type == "legs"):
-            self.inventory.armor["legs"] = item # Set the new legs armor
-
-    def setFeetArmor(self, item):
-        if (self.inventory.armor["feet"] != None):
-            self.inventory.objects.append(self.inventory.armor["feet"]) # Replace the actual feet armor to the inventory (player's list of objects)
-        if (item.type == "feet"):
-            self.inventory.armor["feet"] = item # Set the new feet armor
 
     """ This method shows player's health, shield and mana """
     def showBars(self):
@@ -168,19 +151,19 @@ class Character:
 
     """ This method shows the whole player's inventory """
     def showInventory(self):
-        leftHand = "\nLeft hand weapon: "
+        leftHand = "\n\nLeft hand weapon: "
         if(self.inventory.weapon["leftHand"] == None):
             leftHand += str(None)
         else:
             leftHand += self.inventory.weapon["leftHand"].name + " (" + str(self.inventory.weapon["leftHand"].value) + " gold, " + str(self.inventory.weapon["leftHand"].damage) + " damages)"
 
-        rightHand = "   Right hand weapon: "
+        rightHand = "\nRight hand weapon: "
         if(self.inventory.weapon["rightHand"] == None):
             rightHand += str(None)
         else:
             rightHand += self.inventory.weapon["rightHand"].name + " (" + str(self.inventory.weapon["rightHand"].value) + " gold, " + str(self.inventory.weapon["rightHand"].damage) + " damages)"
 
-        jewel1 = "\nJewel 1: "
+        jewel1 = "\n\nJewel 1: "
         if(self.inventory.jewels["jewel1"] == None):
             jewel1 += str(None)
         else:
@@ -192,31 +175,31 @@ class Character:
         else:
             jewel2 += self.inventory.jewels["jewel2"].name + " (" + str(self.inventory.jewels["jewel2"].value) + " gold, dodge: +" + str(self.inventory.jewels["jewel2"].dodge) + " %, parry: +" + str(self.inventory.jewels["jewel2"].parry) + " %, critical hit: +" + str(self.inventory.jewels["jewel2"].criticalHit) + " %, max health: +" + str(self.inventory.jewels["jewel2"].maxHealth) + " %)"
 
-        headArmor = "\nHead armor: "
+        headArmor = "\n\nHead armor: "
         if(self.inventory.armor["head"] == None):
             headArmor += str(None)
         else:
             headArmor += self.inventory.armor["head"].name + " (" + str(self.inventory.armor["head"].value) + " gold, armor: +" + str(self.inventory.armor["head"].armor) + " %)"
 
-        chestArmor = "   Chest armor: "
+        chestArmor = "\nChest armor: "
         if(self.inventory.armor["chest"] == None):
             chestArmor += str(None)
         else:
             chestArmor += self.inventory.armor["chest"].name + " (" + str(self.inventory.armor["chest"].value) + " gold, armor: +" + str(self.inventory.armor["chest"].armor) + " %)"
 
-        armsArmor = "   Arms armor: "
+        armsArmor = "\nArms armor: "
         if(self.inventory.armor["arms"] == None):
             armsArmor += str(None)
         else:
             armsArmor += self.inventory.armor["arms"].name + " (" + str(self.inventory.armor["arms"].value) + " gold, armor: +" + str(self.inventory.armor["arms"].armor) + " %)"
 
-        legsArmor = "   Legs armor: "
+        legsArmor = "\nLegs armor: "
         if(self.inventory.armor["legs"] == None):
             legsArmor += str(None)
         else:
             legsArmor += self.inventory.armor["legs"].name + " (" + str(self.inventory.armor["legs"].value) + " gold, armor: +" + str(self.inventory.armor["legs"].armor) + " %)"
 
-        feetArmor = "   Feet armor: "
+        feetArmor = "\nFeet armor: "
         if(self.inventory.armor["feet"] == None):
             feetArmor += str(None)
         else:

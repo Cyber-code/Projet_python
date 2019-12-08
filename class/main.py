@@ -11,17 +11,24 @@ def main():
     #name = input("Enter your player's name : ")
     player = Player(name="Nico")
     print(player.showInfo())
+    print(player.showInventory())
 
-    jewel = generateResistanceNecklace()
-    jewel2 = generateAnticipationNecklace()
-    print(player.showInventory())
-    print(player.setJewel(jewel, slot="jewel1"))
-    print(player.showInventory())
-    print(player.setJewel(jewel2, slot="jewel2"))
-    print(player.showInventory())
+    helmet = generateDiamondHelmet()
+    chestPlate = generateDiamondChestplate()
+    arms = generateDiamondArmsProtection()
+    leggings = generateDiamondLeggings()
+    boots = generateDiamondBoots()
+
+    player.setArmor(helmet)
+    player.setArmor(chestPlate)
+    player.setArmor(arms)
+    player.setArmor(leggings)
+    player.setArmor(boots)
+
+    player.setArmor(generateIronHelmet())
+
     print(player.showInfo())
     print(player.showInventory())
-    print(player.showInfo())
 
 
 main()
