@@ -1,11 +1,11 @@
-from Inventory import Inventory
-from Consumable import *
-from Weapon import *
+from Inventory import Inventory, generateInventory
+from Consumable import Consumable, generateConsumable
+from Weapon import Weapon, generateWeapon
 from Player import Player
-from Jewels import *
-from Armor import *
-from Monster import *
-from Spell import *
+from Jewels import Jewels, generateJewel
+from Armor import Armor, generateArmor
+from Monster import Monster, generateMonster
+from Spell import Spell, generateSpell
 from Battle import Battle
 
 def main():
@@ -18,6 +18,7 @@ def main():
     player.addItem(generateWeapon())
     player.addItem(generateConsumable(name="potion_mana"))
     monster = generateMonster(name="zombie")
+    monster.inventory = generateInventory()
     battle = Battle(player, monster)
 
     battle.run()

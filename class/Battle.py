@@ -29,6 +29,15 @@ class Battle:
         if(self.player.isAlive()):
             print("\nWell done, you killed the {}.".format(self.monster.name))
             items = self.monster.dropItems()
+            print("{} got {} xp.".format(self.player.name, str(items[0])))
+            print("{} got {} gold.".format(self.player.name, str(items[1])))
+            self.player.addXp(items[0])
+            self.player.inventory.gold += items[1]
+            for objects in items[2]:
+                print("{} got {}.".format(self.player.name, objects.showInfo()))
+                self.player.inventory.objects.append(objects)
+            
+            print(self.player.showInventory())
             return True
         # Player dead, monster alive
         else:

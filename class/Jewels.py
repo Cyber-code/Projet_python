@@ -11,7 +11,7 @@ class Jewels(Equipement):
 
 
     def showInfo(self):
-        return "\nJewel: " + Equipement.showInfo(self) + "\nDodge: +" + str(self.dodge)+" %" + "\nParry: +" + str(self.parry)+" %" + "\nCritical hit: +" + str(self.criticalHit)+" %"+ "\nMaximum Health: +" + str(self.maxHealth)+" %" + "\n"
+        return Equipement.showInfo(self) + "Dodge: +" + str(self.dodge)+" %, " + "Parry: +" + str(self.parry)+" %, " + "Critical hit: +" + str(self.criticalHit)+" %, "+ "Maximum Health: +" + str(self.maxHealth)+" %)"
 
 def generateJewel(name="strenght_necklace"):
     if(name == "strenght_necklace"):

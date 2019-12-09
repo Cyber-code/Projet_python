@@ -16,9 +16,11 @@ class Monster(Character):
     """ When the monster is killed by the player then it drops a lot of items 
         This method can be modified """
     def dropItems(self):
-        gold = 10
-        healthPotion = Consumable(name="Potion of heath", value=5, health=5)
-        return [gold, self.xp, healthPotion]
+        items = (self.xp, self.inventory.gold, self.inventory.objects)
+        # Clear the monster's inventory
+        self.inventory.gold = 0
+        self.inventory.objects = []
+        return items
 
 def generateMonster(name="zombie"):
     if(name == "zombie"):

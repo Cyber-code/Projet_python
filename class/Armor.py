@@ -11,7 +11,7 @@ class Armor(Equipement):
 
 
     def showInfo(self):
-        return "\nArmor: " + Equipement.showInfo(self) + "\nArmor protection: +" + str(self.armor)+" %" + "\n"
+        return Equipement.showInfo(self) + "Armor protection: +" + str(self.armor)+" %)"
 
 def generateArmor(name="leather_helmet"):
     if(name == "leather_helmet"):
