@@ -1,7 +1,7 @@
 from Inventory import Inventory
 from random import randint
 from math import sqrt
-from Spell import *
+from Spell import generateSpell
 
 class Character:
     def __init__(self, name, health, shield, dodge,
@@ -28,18 +28,22 @@ class Character:
 
         self.addXp(xp) # To update the level in function of xp
 
-    """ When the player uses a consumable which regerate his health """
+    """ This methods is used to regenerate an amount of health to the character """
     def addHealth(self, health):
         if(self.health + health >= self.maxHealth):
             self.health = self.maxHealth
         else:
             self.health += health
 
+    """ This methods is used to give such gold to the character """
+    def addGold(self, gold=0):
+        self.inventory.gold += gold
+
     """ This method is used to add an item/object to the player's inventory """
     def addItem(self, item):
         self.inventory.objects.append(item)
 
-    """ When the player uses a consumable which regerate his mana (magic points) """
+    """ This methods is used to regenerate an amount of mana to the character """
     def addMana(self, mana):
         if(self.mana + mana >= self.maxMana):
             self.mana = self.maxMana
@@ -53,10 +57,7 @@ class Character:
         else:
             self.shield += shield
 
-    """ 
-    This method is called when the player killed
-    monsters and he earn some xp
-    """
+    """ This method is called when the player killed monsters and he earn some xp"""
     def addXp(self, xp):
         self.xp += xp
         # From lvl 0 to 16
@@ -68,6 +69,19 @@ class Character:
         # From 32 to ...
         else:
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
+
+    """ 
+    This method allows the character to buy an items, return True if the item is bought or return False otherwise 
+    If the character has enought gold, then the item is added to character's inventory
+    """
+    def buyItem(self, item):
+        if(self.inventory.gold >= item.value):
+            self.inventory.gold -= item.value
+            self.addItem(item)
+            return True
+        else:
+            print("\nNot enought gold !\n")
+            return False
 
     """ This method calculates damages given by a Character """
     def hit(self, hand="leftHand"):
