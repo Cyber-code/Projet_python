@@ -5,4 +5,4 @@ class Object:
         self.value = value
 
     def showInfo(self):
-        return "\nName: " + self.name + "\nValue: "+ str(self.value)+" gold"
+        return self.name + " (Value: "+ str(self.value)+" gold, "

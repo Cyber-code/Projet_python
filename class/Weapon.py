@@ -8,9 +8,8 @@ class Weapon(Equipement):
         
         self.type = "weapon"
 
-
     def showInfo(self):
-        return "\nWeapon: " + Equipement.showInfo(self) + "\nDamage: +" + str(self.damage) + "\n"
+        return Equipement.showInfo(self) + "Damage: +" + str(self.damage) + ")"
 
 
 def generateWoodenSword():

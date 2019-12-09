@@ -10,3 +10,6 @@ class Spell:
 
 def generateFireball():
     return Spell(name="Fireball", damage=2, mana=5)
+
+def generateLightning():
+    return Spell(name="Lightning", damage=5, mana=10)

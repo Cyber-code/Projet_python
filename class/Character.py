@@ -1,7 +1,7 @@
 from Inventory import Inventory
 from random import randint
 from math import sqrt
-from Spell import Spell
+from Spell import *
 
 class Character:
     def __init__(self, name, health, shield, dodge,
@@ -56,12 +56,18 @@ class Character:
         return damages
 
     """ This method selects spell and calculates its damages """
-    def throwSpell(self, spell):
+    def throwSpell(self, spellName="Fireball"):
+        if(spellName == "Lightning"):
+            spell = generateLightning()
+        else:
+            spell = generateFireball()
+
         damages = spell.damage
         if (0 < spell.mana <= self.mana):
             self.mana -= spell.mana
         else:
             print("\nNot enought mana !\n")
+            damages = 0
 
         if (randint(0, 100) <= self.criticalHit):
             damages *= 2
@@ -87,7 +93,7 @@ class Character:
 
         return self.isAlive()
 
-
+    """ This method return True if the character is alive or False else """
     def isAlive(self):
         if self.health > 0:
             return True
@@ -95,8 +101,7 @@ class Character:
             return False
 
 
-    """ Methods which modify inventory's organisation """
-
+    """ This method equip the character with a weapon """
     def setWeapon(self, item, hand="leftHand"):
         if (item.type == "weapon" and hand in ["leftHand", "rightHand"]):
             if (self.inventory.weapon[hand] != None):
@@ -107,7 +112,7 @@ class Character:
         else:
             return False
 
-
+    """ This method equip the character with a jewel """
     def setJewel(self, item, slot="jewel1"):
         if (item.type == "jewel" and slot in ["jewel1", "jewel2"]):
             if (self.inventory.jewels[slot] != None):
@@ -130,6 +135,7 @@ class Character:
         else:
             return False
 
+    """ This method equip the character with an armor """
     def setArmor(self, item):
         if (item.type in ["head", "chest", "arms", "legs", "feet"]):
             if (self.inventory.armor[item.type] != None):
@@ -144,7 +150,7 @@ class Character:
 
     """ This method shows player's health, shield and mana """
     def showBars(self):
-        return "\n{} (lvl {}, {} xp)".format(self.name, self.level, self.xp) + "\nHearth: {} / {}".format(self.health, self.maxHealth) + "\nShield: {} / {}".format(self.shield, self.maxShield) + "\nMana: {} / {}".format(self.mana, self.maxMana)
+        return "\n{} (lvl {}, {} xp)".format(self.name, self.level, self.xp) + "\nHealth: {} / {}".format(self.health, self.maxHealth) + "\nShield: {} / {}".format(self.shield, self.maxShield) + "\nMana: {} / {}".format(self.mana, self.maxMana)
 
 
     def showInfo(self):

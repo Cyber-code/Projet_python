@@ -6,31 +6,16 @@ from Jewels import *
 from Armor import *
 from Monster import *
 from Spell import *
+from Battle import Battle
 
 def main():
     #name = input("Enter your player's name : ")
     player = Player(name="Nico")
-    print(player.showInfo())
-    print(player.showInventory())
+    player.setWeapon(generateStoneSword())
+    monster = generateZombie()
+    battle = Battle(player, monster)
 
-    helmet = generateDiamondHelmet()
-    chestPlate = generateDiamondChestplate()
-    arms = generateDiamondArmsProtection()
-    leggings = generateDiamondLeggings()
-    boots = generateDiamondBoots()
-
-    player.setArmor(helmet)
-    player.setArmor(chestPlate)
-    player.setArmor(arms)
-    player.setArmor(leggings)
-    player.setArmor(boots)
-
-    print(player.showInfo())
-    print(player.showInventory())
-
-    player.getDamages(100)
-    print(player.showBars())
-
+    battle.run()
 
 
 main()
