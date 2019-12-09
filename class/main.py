@@ -7,9 +7,11 @@ from Armor import Armor, generateArmor
 from Monster import Monster, generateMonster
 from Spell import Spell, generateSpell
 from Battle import Battle
+from Merchant import Merchant, generateMerchant
 
 def main():
     #name = input("Enter your player's name : ")
+    """
     player = Player(name="Nico")
     player.setWeapon(generateWeapon(name="golden_sword"))
     player.addItem(generateConsumable(name="potion_mana"))
@@ -22,6 +24,9 @@ def main():
     battle = Battle(player, monster)
 
     battle.run()
+    """
+    merchant = generateMerchant(name="jewels_merchant")
+    print(merchant.showInventory())
 
 
 main()
