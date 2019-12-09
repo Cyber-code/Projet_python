@@ -3,10 +3,8 @@ from Equipement import Equipement
 """ Weapon class instantiate weapon object which is used to increase damage stat of the player"""
 class Weapon(Equipement):
     def __init__(self, name="Wooden stick", value=0, damage=1):
-        Equipement.__init__(self, name, value)
+        Equipement.__init__(self, name, value, typeObject="weapon")
         self.damage = damage
-        
-        self.type = "weapon"
 
     def showInfo(self):
         return Equipement.showInfo(self) + "Damage: +" + str(self.damage) + ")"

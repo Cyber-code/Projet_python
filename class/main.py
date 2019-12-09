@@ -12,6 +12,11 @@ def main():
     #name = input("Enter your player's name : ")
     player = Player(name="Nico")
     player.setWeapon(generateStoneSword())
+    player.addItem(generatePotionRegeneration())
+    player.addItem(generatePotionMana())
+    player.addItem(generatePotionMana())
+    player.addItem(generateWoodenSword())
+    player.addItem(generatePotionMana())
     monster = generateZombie()
     battle = Battle(player, monster)
 

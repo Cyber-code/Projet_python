@@ -6,9 +6,8 @@ class Armor(Equipement):
         if (armorType.lower() not in ["head", "chest", "arms", "legs", "feet"]):
             raise ValueError("The armor type is not conform, please choose armorType equals at head, chest, arms, legs or feet.")
 
-        Equipement.__init__(self, name, value)
+        Equipement.__init__(self, name, value, typeObject=armorType)
         self.armor = armor    # Percentage of reducing damages
-        self.type = armorType # This parameter is used to specify where the player have to wear this armor (head, chest, arms, legs, feet)
 
 
     def showInfo(self):

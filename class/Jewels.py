@@ -3,13 +3,11 @@ from Equipement import Equipement
 """ Jewels class instantiate jewel object which is used to increase dodge, parry, criticalHit or maxHealth of the player"""
 class Jewels(Equipement):
     def __init__(self, name="Pasta necklace", value=0, dodge=0, parry=0, criticalHit=0, maxHealth=0):
-        Equipement.__init__(self, name, value)
+        Equipement.__init__(self, name, value, typeObject="jewel")
         self.dodge = dodge
         self.parry = parry
         self.criticalHit = criticalHit
         self.maxHealth = maxHealth
-        
-        self.type = "jewel"
 
 
     def showInfo(self):

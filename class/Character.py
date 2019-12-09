@@ -28,6 +28,31 @@ class Character:
 
         self.addXp(xp) # To update the level in function of xp
 
+    """ When the player uses a consumable which regerate his health """
+    def addHealth(self, health):
+        if(self.health + health >= self.maxHealth):
+            self.health = self.maxHealth
+        else:
+            self.health += health
+
+    """ This method is used to add an item/object to the player's inventory """
+    def addItem(self, item):
+        self.inventory.objects.append(item)
+
+    """ When the player uses a consumable which regerate his mana (magic points) """
+    def addMana(self, mana):
+        if(self.mana + mana >= self.maxMana):
+            self.mana = self.maxMana
+        else:
+            self.mana += mana
+
+    """ When the player uses a consumable which regerate his shield """
+    def addShield(self, shield):
+        if(self.shield + shield >= self.maxShield):
+            self.shield = self.maxShield
+        else:
+            self.shield += shield
+
     """ 
     This method is called when the player killed
     monsters and he earn some xp
@@ -227,3 +252,14 @@ class Character:
                 objects += "Error: ObjectType not implemented)"
 
         return "\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name) + "\nGold: "+ str(self.inventory.gold) + leftHand + rightHand + jewel1 + jewel2 + headArmor + chestArmor + armsArmor + legsArmor + feetArmor + objects + "\n" + "".join(["-" for i in range(len("\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name))-1)])
+
+    def use(self, consumableIndex):
+        if(self.inventory.objects[consumableIndex].type == "consumable"):
+            self.addHealth(self.inventory.objects[consumableIndex].health)
+            self.addMana(self.inventory.objects[consumableIndex].mana)
+            self.addShield(self.inventory.objects[consumableIndex].shield)
+            self.addXp(self.inventory.objects[consumableIndex].xp)
+
+            self.inventory.objects.pop(consumableIndex)
+
+        return False

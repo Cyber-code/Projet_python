@@ -9,31 +9,6 @@ class Player(Character):
                  damageMax=2, armor=0, xp=0, inventory=Inventory()):
         Character.__init__(self, name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, inventory)
 
-    """ When the player uses a consumable which regerate his health """
-    def addHealth(self, health):
-        if(self.health + health >= self.maxHealth):
-            self.health = self.maxHealth
-        else:
-            self.health += health
-
-    """ This method is used to add an item/object to the player's inventory """
-    def addItem(self, item):
-        self.inventory.objects.append(item)
-
-    """ When the player uses a consumable which regerate his mana (magic points) """
-    def addMana(self, mana):
-        if(self.mana + mana >= self.maxMana):
-            self.mana = self.maxMana
-        else:
-            self.mana += mana
-
-    """ When the player uses a consumable which regerate his shield """
-    def addShield(self, shield):
-        if(self.shield + shield >= self.maxShield):
-            self.shield = self.maxShield
-        else:
-            self.shield += shield
-
     """ 
     This method is called when the player killed
     monsters and he earn some xp

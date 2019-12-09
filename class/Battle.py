@@ -16,26 +16,11 @@ class Battle:
             action = False
             while(action == False):
                 (action, damages) = self.selectAction()
-            """
-            if(action == 1):
-                if(self.selectWeapon() == 1):
-                    damages = self.player.hit("leftHand")
-                else:
-                    damages = self.player.hit("rightHand")
-            elif(action == 2):
-                if(self.selectSpell() == 1):
-                    damages = self.player.throwSpell("Fireball")
-                else:
-                    damages = self.player.throwSpell("Lightning")
-            elif(action == 3):
-                self.selectConsumable()
-            else:
-                damages = 0
-            """
+            
             self.monster.getDamages(damages)
             print(self.monster.showBars())
 
-        print("Well done, you killed the {}.".format(self.monster.name))
+        print("\nWell done, you killed the {}.".format(self.monster.name))
         items = self.monster.dropItems()
 
 
@@ -85,6 +70,9 @@ class Battle:
                 return (False, 0)
         # Use a consumable
         elif(choice == 3):
+            choice2 = self.selectConsumable()
+            if(choice2 != -1):
+                self.player.use(choice2)
             return (False, 0)
         # Show player's bars
         elif(choice == 4):
@@ -96,7 +84,7 @@ class Battle:
 
     """ This method allows the player to choose a weapon """
     def selectWeapon(self):
-        print("\nSelect your weapon")
+        print("\nSelect your weapon:")
         print("0 - Previous")
         if(self.player.inventory.weapon["leftHand"] == None):
             leftHand = "None"
@@ -130,4 +118,16 @@ class Battle:
 
     """ This method allows the player to use a consumable """
     def selectConsumable(self):
-        pass
+        print("\nSelect the consumable to use: ")
+        print("-1 -  Previous")
+        consumableIndex = ['-1']
+        for i,objects in enumerate(self.player.inventory.objects):
+            if(objects.type == "consumable"):
+                print(i, " - ", objects.showInfo())
+                consumableIndex.append(str(i))
+
+        choice = str()
+        while(choice not in consumableIndex):
+            choice = input("Consumable to use: ")
+        print("--------------------------------------------------")
+        return int(choice)
