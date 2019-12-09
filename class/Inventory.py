@@ -1,3 +1,6 @@
+from random import randint
+
+""" Inventory class instantiate a inventory object which is a character's caracteristic """
 class Inventory:
     def __init__(self, objects=[], gold=0, leftHand=None, rigthHand=None, jewel1=None, jewel2=None, headArmor=None, chestArmor=None, armsArmor=None, legsArmor=None, feetArmor=None):
         self.objects = objects  # objects is a list of weapons, jewels, armors and consumables
@@ -9,3 +12,10 @@ class Inventory:
 
     def showInfo(self):
         return "\nInventory" + "\nGold: "+str(self.gold)+" coins" + "\nObjects: "+str(self.objects) +"\nWeapon: "+str(self.weapon) + "\nJewels: "+str(self.jewels)+" %" + "\nArmor: "+str(self.armor)+ "\n"
+
+
+def generateInventory():
+    objects = []
+    if(randint(0,100) <= 1):
+        pass
+    return Inventory(objects=objects, gold=randint(0, 10))

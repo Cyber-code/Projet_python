@@ -13,18 +13,16 @@ class Consumable(Object):
     def showInfo(self):
         return Object.showInfo(self) + "Health: +"+ str(self.health)+" PV" + ", Shield: +"+str(self.shield) + ", Mana: +"+str(self.mana) + ", Xp: +"+str(self.xp) +")"
 
-
-def generatePotionHealing():
-    return Consumable(name="Potion of Healing", value=2, health=10)
-
-def generatePotionMana():
-    return Consumable(name="Potion of Mana", value=2, mana=5)
-
-def generatePotionRegeneration():
-    return Consumable(name="Potion of Regeneration", value=10, health=1000, shield=1000, mana=1000)
-
-def generatShieldPiece():
-    return Consumable(name="Piece of Shield", value=2, shield=5)
-
-def generateKnowledgeBook():
-    return Consumable(name="Book of Knowledge", value=100, xp=100)
+def generateConsumable(name="potion_healing"):
+    if(name == "potion_healing"):
+        return Consumable(name="Potion of Healing", value=2, health=10)
+    elif(name == "potion_mana"):
+        return Consumable(name="Potion of Mana", value=2, mana=5)
+    elif(name == "potion_regeneration"):
+        return Consumable(name="Potion of Regeneration", value=10, health=1000, shield=1000, mana=1000)
+    elif(name == "piece_shield"):
+        return Consumable(name="Piece of Shield", value=2, shield=5)
+    elif(name == "book_knowledge"):
+        return Consumable(name="Book of Knowledge", value=100, xp=100)
+    else:
+        return Consumable(name="Potion of Healing", value=2, health=10)

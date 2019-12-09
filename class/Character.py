@@ -70,7 +70,7 @@ class Character:
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
 
     """ This method calculates damages given by a Character """
-    def hit(self, hand):
+    def hit(self, hand="leftHand"):
         damages = int()
         if (hand in ["leftHand", "rightHand"] and self.inventory.weapon[hand] != None):
             damages += self.inventory.weapon[hand].damage
@@ -83,9 +83,9 @@ class Character:
     """ This method selects spell and calculates its damages """
     def throwSpell(self, spellName="Fireball"):
         if(spellName == "Lightning"):
-            spell = generateLightning()
+            spell = generateSpell("lightning")
         else:
-            spell = generateFireball()
+            spell = generateSpell(name="fireball")
 
         damages = spell.damage
         if (0 < spell.mana <= self.mana):

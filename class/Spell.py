@@ -8,8 +8,10 @@ class Spell:
     def showInfo(self):
         return "\nSpell:\nName: {}\nDamages: {}\nMana: {}".format(self.name, str(self.damage), str(self.mana))
 
-def generateFireball():
-    return Spell(name="Fireball", damage=2, mana=5)
-
-def generateLightning():
-    return Spell(name="Lightning", damage=5, mana=10)
+def generateSpell(name="fireball"):
+    if(name=="fireball"):
+        return Spell(name="Fireball", damage=2, mana=5)
+    elif(name=="lightning"):
+        return Spell(name="Lightning", damage=5, mana=10)
+    else:
+        return Spell(name="Fireball", damage=2, mana=5)

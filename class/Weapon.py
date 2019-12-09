@@ -9,24 +9,20 @@ class Weapon(Equipement):
     def showInfo(self):
         return Equipement.showInfo(self) + "Damage: +" + str(self.damage) + ")"
 
-
-def generateWoodenSword():
-    return Weapon(name="Wooden Sword", value = 10, damage=4)
-
-def generateGoldenSword():
-    return Weapon(name="Golden Sword", value = 80, damage=4)
-
-def generateStoneSword():
-    return Weapon(name="Stone Sword", value = 20, damage=5)
-
-def generateIronSword():
-    return Weapon(name="Iron Sword", value = 50, damage=6)
-
-def generateDiamondSword():
-    return Weapon(name="Diamond Sword", value = 100, damage=7)
-
-def generateBow():
-    return Weapon(name="Bow", value = 200, damage=9)
-
-def generateCrossbow():
-    return Weapon(name="Crossbow", value = 300, damage=10)
+def generateWeapon(name="wooden_sword"):
+    if(name == "wooden_sword"):
+        return Weapon(name="Wooden Sword", value = 10, damage=4)
+    elif(name == "goldden_sword"):
+        return Weapon(name="Golden Sword", value = 80, damage=4)
+    elif(name == "stone_sword"):
+        return Weapon(name="Stone Sword", value = 20, damage=5)
+    elif(name == "iron_sword"):
+        return Weapon(name="Iron Sword", value = 50, damage=6)
+    elif(name == "diamond_sword"):
+        return Weapon(name="Diamond Sword", value = 100, damage=7)
+    elif(name == "bow"):
+        return Weapon(name="Bow", value = 200, damage=9)
+    elif(name == "crossbow"):
+        return Weapon(name="Crossbow", value = 300, damage=10)
+    else:
+        return Weapon(name="Wooden Sword", value = 10, damage=4)

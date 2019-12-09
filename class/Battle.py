@@ -11,17 +11,29 @@ class Battle:
     def run(self):
         print("\nYou enter into the battle against a {}.".format(self.monster.name))
         print(self.monster.showInfo())
-        while(self.monster.isAlive()):
+        while(self.monster.isAlive() and self.player.isAlive()):
             
+            # Player attacks the monster
             action = False
             while(action == False):
                 (action, damages) = self.selectAction()
-            
             self.monster.getDamages(damages)
             print(self.monster.showBars())
 
-        print("\nWell done, you killed the {}.".format(self.monster.name))
-        items = self.monster.dropItems()
+            if(self.monster.isAlive()):
+                print("\n", self.monster.name, " attacks !")
+                self.player.getDamages(self.monster.hit())
+                print(self.player.showBars())
+
+        # Player alive, monster dead
+        if(self.player.isAlive()):
+            print("\nWell done, you killed the {}.".format(self.monster.name))
+            items = self.monster.dropItems()
+            return True
+        # Player dead, monster alive
+        else:
+            print("\nYou has been killed by the {}".format(self.monster.name))
+            return False
 
 
     """ This method allows the player to choose an action during a battle """
