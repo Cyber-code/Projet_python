@@ -7,18 +7,61 @@ class Transaction:
         self.player = player
         self.merchant = merchant
 
+    """ This method starts the transaction with the merchant """
     def run(self):
-        print("You meet a {}.".format(self.merchant.name.upper()))
+        print("You meet a {}.".format(self.merchant.name.lower()))
         while(True):
-            pass
-
+            if(self.selectAction()):
+                break
+        
+        print("\nYou leave the transaction.")
         return True
 
     """ This method allows the player to choose an action during a transaction """
     def selectAction(self):
         print("\nSelect your action")
-        print("1 - Buy an item")
-        print("2 - Throw a spell")
-        print("3 - Use a consumable")
-        print("4 - Show bars (health, shield, mana)")
-        print("5 - Do nothing")
+        print("1 - Buy an object")
+        print("2 - Sell an object")
+        print("3 - Show inventory")
+        print("4 - Equip with an object")
+        print("5 - Take off an object")
+        print("6 - Leave transaction")
+
+        choice = str()
+        while(choice not in ["1","2","3","4","5","6"]):
+            choice = input("Your action: ")
+
+        print("--------------------------------------------------")
+        choice = int(choice)
+
+        # Buy an object
+        if(choice == 1):
+            return False
+        # Sell an object
+        elif(choice == 2):
+            return False
+        # Show the Inventory
+        elif(choice == 3):
+            print(self.player.showInventory())
+            return False
+        # Equip with an object
+        elif(choice == 4):
+            return False
+        # Take off an object
+        elif(choice == 5):
+            return False
+        # Leave transaction
+        else:
+            return True
+
+    def selectObjectToBuy(self):
+        pass
+
+    def selectObjectTosell(self):
+        pass
+
+    def selectObjectToEquip(self):
+        pass
+
+    def selectObjectToDequip(self):
+        pass

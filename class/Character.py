@@ -19,7 +19,7 @@ class Character:
         self.armor = armor              # Armor point, reduced incoming damage by a percentage
         self.level = 0                  # Level, each leave increase a small of the characteristics above
         self.xp = 0                     # Experience bar, when filled, increase cureent level by one
-        self.inventory = inventory
+        self.inventory = Inventory()
         self.maxLevel = 40
 
         self.maxHealth = health
