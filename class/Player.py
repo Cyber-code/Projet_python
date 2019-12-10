@@ -44,6 +44,26 @@ class Player(Character):
             print("\nNot enought gold !\n")
             return 0
 
+    """ This methods allows the player to equip himself with a weapon, jewel or armor """
+    def equipItem(self, item, slot):
+        if(item in self.inventory.objects):
+            if(item.type == "weapon" and slot == 1):
+                self.setWeapon(item, slot="leftHand")
+            elif(item.type == "weapon" and slot == 2):
+                self.setWeapon(item, slot="rightHand")
+            elif(item.type == "jewel" and slot == 1):
+                self.setJewel(item, slot="jewel1")
+            elif(item.type == "jewel" and slot == 2):
+                self.setJewel(item, slot="jewel2")
+            elif(item.type in ["head", "chest", "arms", "legs", "feet"]):
+                self.setArmor(item)
+            else:
+                pass
+            self.inventory.objects.remove(item)
+            return True
+        else:
+            return False
+
     """ This method allows the player to sell an items, return True if the item is not None or return False otherwise """
     def sellItem(self, item):
         if(item != None):

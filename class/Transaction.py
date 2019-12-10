@@ -10,6 +10,7 @@ class Transaction:
     """ This method starts the transaction with the merchant """
     def run(self):
         print("You meet a {}.".format(self.merchant.name.lower()))
+        print("You have {} gold.".format(self.player.inventory.gold))
         while(True):
             if(self.selectAction()):
                 break
@@ -53,6 +54,9 @@ class Transaction:
             return False
         # Equip with an object
         elif(choice == 4):
+            (choice2, slot) = self.selectObjectToEquip()
+            if(choice2 > -1):
+                self.player.equipItem(self.player.inventory.objects[choice2], slot)
             return False
         # Take off an object
         elif(choice == 5):
@@ -96,7 +100,29 @@ class Transaction:
         return int(choice)
 
     def selectObjectToEquip(self):
-        pass
+        print("\nSelect the object to equip: ")
+        print("-1 -  Previous")
+        objectIndex = ['-1']
+        for i,objects in enumerate(self.player.inventory.objects):
+            if(objects.type in ["head","chest","arms","legs","feet","weapon","jewel"]):
+                print(i, " - ", objects.showInfo())
+                objectIndex.append(str(i))
+
+        choice = str()
+        while(choice not in objectIndex):
+            choice = input("Object to equip: ")
+        print("--------------------------------------------------")
+
+        slot = "0"
+        if(self.player.inventory.objects[int(choice)].type in ["jewel","weapon"]):
+            print("\nSelect the slot : ")
+            print("1 -  Slot 1")
+            print("2 -  Slot 2")
+            while(slot not in ["1","2"]):
+                slot = input("Slot : ")
+            print("--------------------------------------------------")
+
+        return (int(choice), int(slot))
 
     def selectObjectToDequip(self):
         pass

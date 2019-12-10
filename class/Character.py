@@ -129,12 +129,12 @@ class Character:
 
 
     """ This method equip the character with a weapon """
-    def setWeapon(self, item, hand="leftHand"):
-        if (item.type == "weapon" and hand in ["leftHand", "rightHand"]):
-            if (self.inventory.weapon[hand] != None):
-                self.inventory.objects.append(self.inventory.weapon[hand]) # Replace the actual left or right weapon to the inventory (player's list of objects)
+    def setWeapon(self, item, slot="leftHand"):
+        if (item.type == "weapon" and slot in ["leftHand", "rightHand"]):
+            if (self.inventory.weapon[slot] != None):
+                self.inventory.objects.append(self.inventory.weapon[slot]) # Replace the actual left or right weapon to the inventory (player's list of objects)
 
-            self.inventory.weapon[hand] = item # Set the new left or right weapon
+            self.inventory.weapon[slot] = item # Set the new left or right weapon
             return True
         else:
             return False
