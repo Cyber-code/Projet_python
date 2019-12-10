@@ -70,18 +70,6 @@ class Character:
         else:
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
 
-    """ 
-    This method allows the character to buy an items, return True if the item is bought or return False otherwise 
-    If the character has enought gold, then the item is added to character's inventory
-    """
-    def buyItem(self, item):
-        if(self.inventory.gold >= item.value):
-            self.inventory.gold -= item.value
-            self.addItem(item)
-            return True
-        else:
-            print("\nNot enought gold !\n")
-            return False
 
     """ This method calculates damages given by a Character """
     def hit(self, hand="leftHand"):

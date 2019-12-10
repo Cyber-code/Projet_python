@@ -25,10 +25,11 @@ class Transaction:
         print("3 - Show inventory")
         print("4 - Equip with an object")
         print("5 - Take off an object")
-        print("6 - Leave transaction")
+        print("6 - Use a consumable")
+        print("7 - Leave transaction")
 
         choice = str()
-        while(choice not in ["1","2","3","4","5","6"]):
+        while(choice not in ["1","2","3","4","5","6","7"]):
             choice = input("Your action: ")
 
         print("--------------------------------------------------")
@@ -36,9 +37,15 @@ class Transaction:
 
         # Buy an object
         if(choice == 1):
+            choice2 = self.selectObjectToBuy()
+            if(choice2 > -1):
+                self.player.buyItem(self.merchant.inventory.objects[choice2])
             return False
         # Sell an object
         elif(choice == 2):
+            choice2 = self.selectObjectTosell()
+            if(choice2 > -1):
+                self.player.sellItem(self.player.inventory.objects[choice2])
             return False
         # Show the Inventory
         elif(choice == 3):
@@ -50,18 +57,62 @@ class Transaction:
         # Take off an object
         elif(choice == 5):
             return False
+        # Use a consumable
+        elif(choice == 6):
+            choice2 = self.selectConsumable()
+            if(choice2 > -1):
+                self.player.use(choice2)
+            return False
         # Leave transaction
         else:
-            return True
+            return True # Leave the loop in the method run
 
     def selectObjectToBuy(self):
-        pass
+        print("\nSelect the object to buy: ")
+        print("-1 -  Previous")
+        objectIndex = ['-1']
+        for i,objects in enumerate(self.merchant.inventory.objects):
+            print(i, " - ", objects.showInfo())
+            objectIndex.append(str(i))
+
+        choice = str()
+        while(choice not in objectIndex):
+            choice = input("Object to buy: ")
+        print("--------------------------------------------------")
+        return int(choice)
 
     def selectObjectTosell(self):
-        pass
+        print("\nSelect the object to sell: ")
+        print("-1 -  Previous")
+        objectIndex = ['-1']
+        for i,objects in enumerate(self.player.inventory.objects):
+            print(i, " - ", objects.showInfo())
+            objectIndex.append(str(i))
+
+        choice = str()
+        while(choice not in objectIndex):
+            choice = input("Object to sell: ")
+        print("--------------------------------------------------")
+        return int(choice)
 
     def selectObjectToEquip(self):
         pass
 
     def selectObjectToDequip(self):
         pass
+
+    """ This method allows the player to use a consumable """
+    def selectConsumable(self):
+        print("\nSelect the consumable to use: ")
+        print("-1 -  Previous")
+        consumableIndex = ['-1']
+        for i,objects in enumerate(self.player.inventory.objects):
+            if(objects.type == "consumable"):
+                print(i, " - ", objects.showInfo())
+                consumableIndex.append(str(i))
+
+        choice = str()
+        while(choice not in consumableIndex):
+            choice = input("Consumable to use: ")
+        print("--------------------------------------------------")
+        return int(choice)

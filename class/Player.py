@@ -27,7 +27,31 @@ class Player(Character):
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
 
         if (level < self.level):
-            self.levelUp()
+            for i in range(self.level-level):
+                self.levelUp()
+                print(i)
+
+    """ 
+    This method allows the player to buy an items, return the value of the item if it is bought or return 0 otherwise 
+    If the player has enought gold, then the item is added to player's inventory
+    """
+    def buyItem(self, item):
+        if(self.inventory.gold >= item.value):
+            self.inventory.gold -= item.value
+            self.addItem(item)
+            return item.value
+        else:
+            print("\nNot enought gold !\n")
+            return 0
+
+    """ This method allows the player to sell an items, return True if the item is not None or return False otherwise """
+    def sellItem(self, item):
+        if(item != None):
+            self.inventory.gold += item.value
+            self.inventory.objects.remove(item)
+            return True
+        else:
+            return False
 
 
     """ Only for the player, when he earns enought xp, then he gains a level """

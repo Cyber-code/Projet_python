@@ -74,5 +74,4 @@ def generateMerchant(name="consumable_merchant"):
         merchant.addItem(generateArmor(name="diamond_arms_protection"))
         merchant.addItem(generateArmor(name="diamond_leggings"))
         merchant.addItem(generateArmor(name="diamond_boots"))
-    merchant.addGold(1000)
     return merchant
