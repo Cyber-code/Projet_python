@@ -17,7 +17,7 @@ class Room:
         if(type(self.mob) == Monster):
             battle = Battle(self.player, self.mob)
             return battle.run()
-        elif(type(self.mob) == Monster):
+        elif(type(self.mob) == Merchant):
             transaction = Transaction(self.player, self.mob)
             return transaction.run()
         else:
