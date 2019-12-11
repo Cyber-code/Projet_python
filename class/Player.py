@@ -1,7 +1,8 @@
-import tkinter
 from Character import Character
 from Inventory import Inventory
 from math import sqrt
+from Statistics import Statistics
+from Success import Success
 
 """ Player class instantiate a player object controled by the user """
 class Player(Character):
@@ -9,6 +10,9 @@ class Player(Character):
                  parry=0, criticalHit=1, mana=10, damageMin=1,
                  damageMax=2, armor=0, xp=0, inventory=Inventory()):
         Character.__init__(self, name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, inventory)
+
+        self.statistics = Statistics()
+        self.success = {"monster_hunter":Success(name="Monster hunter"), "commercial":Success(name="Commercial"), "lucky":Success(name="Lucky"), "compulsive_buyer":Success(name="Compulsive buyer"), "vendor":Success(name="Vendor on the run"), "consumer":Success(name="Consumer"), "the_end":Success(name="The End")}
 
     """ 
     This method is called when the player killed
@@ -118,3 +122,12 @@ class Player(Character):
         self.parry += 1
         self.criticalHit += 1
         self.armor += 1
+
+    def showStatistics(self):
+        return "\n{}'s statistics:\nMonsters killed: {}\nMerchants met: {}\nChests found: {}\nObjects bought: {}\nObjects sold: {}\nConsumables used: {}\nEnder dragon killed: {}\n".format(self.name, self.statistics.monstersKilled, self.statistics.merchantsMet, self.statistics.chestsFound, self.statistics.objectsBought, self.statistics.objectsSold, self.statistics.consumablesUsed, self.statistics.enderDragonsKilled)
+
+    def showSuccess(self):
+        success = ""
+        for elt in self.success:
+            success += self.success[elt].showInfo()
+        return "\n{}'s success: {}".format(self.name, success)

@@ -7,6 +7,8 @@ from Weapon import generateWeapon
 def main():
     name = input("Enter your player's name : ")
     player = Player(name=name)
+    print(player.showStatistics())
+    print(player.showSuccess())
 
     print("\nSelect the difficulty:")
     print("1 - Easy")
@@ -26,8 +28,6 @@ def main():
         player.addItem(generateWeapon(name="wooden_sword"))
     if(difficulty < 2):
         player.addGold(10)
-
-    print(player.showInventory())
 
     map = Map(player)
     if(not map.run()):
