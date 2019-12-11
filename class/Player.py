@@ -44,6 +44,34 @@ class Player(Character):
             print("\nNot enought gold !\n")
             return 0
 
+    """ This methods allows the player to take off a weapon, jewel or armor """
+    def dequipItem(self, item):
+        if(item != None):
+            if(item == self.inventory.weapon["leftHand"]):
+                self.inventory.weapon["leftHand"] = None
+            elif(item == self.inventory.weapon["rightHand"]):
+                self.inventory.weapon["rightHand"] = None
+            elif(item == self.inventory.jewels["jewel1"]):
+                self.inventory.jewels["jewel1"] = None
+            elif(item == self.inventory.jewels["jewel2"]):
+                self.inventory.jewels["jewel2"] = None
+            elif(item == self.inventory.armor["head"]):
+                self.inventory.armor["head"] = None
+            elif(item == self.inventory.armor["chest"]):
+                self.inventory.armor["chest"] = None
+            elif(item == self.inventory.armor["arms"]):
+                self.inventory.armor["arms"] = None
+            elif(item == self.inventory.armor["legs"]):
+                self.inventory.armor["legs"] = None
+            elif(item == self.inventory.armor["feet"]):
+                self.inventory.armor["feet"] = None
+            else:
+                pass
+            self.addItem(item)
+            return True
+        else:
+            return False
+
     """ This methods allows the player to equip himself with a weapon, jewel or armor """
     def equipItem(self, item, slot):
         if(item in self.inventory.objects):

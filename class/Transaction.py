@@ -60,6 +60,9 @@ class Transaction:
             return False
         # Take off an object
         elif(choice == 5):
+            choice2 = self.selectObjectToDequip()
+            if(choice2 != None):
+                self.player.dequipItem(choice2)
             return False
         # Use a consumable
         elif(choice == 6):
@@ -114,7 +117,7 @@ class Transaction:
         print("--------------------------------------------------")
 
         slot = "0"
-        if(self.player.inventory.objects[int(choice)].type in ["jewel","weapon"]):
+        if(self.player.inventory.objects[int(choice)].type in ["jewel","weapon"] and choice != "-1"):
             print("\nSelect the slot : ")
             print("1 -  Slot 1")
             print("2 -  Slot 2")
@@ -125,7 +128,23 @@ class Transaction:
         return (int(choice), int(slot))
 
     def selectObjectToDequip(self):
-        pass
+        print("\nSelect the object to take off: ")
+        print("-1 -  Previous")
+        objectIndex = ['-1']
+        equipement = [obj for obj in [self.player.inventory.weapon["leftHand"], self.player.inventory.weapon["rightHand"], self.player.inventory.jewels["jewel1"], self.player.inventory.jewels["jewel2"], self.player.inventory.armor["head"], self.player.inventory.armor["chest"], self.player.inventory.armor["arms"], self.player.inventory.armor["legs"], self.player.inventory.armor["feet"]] if obj != None]
+        for i,objects in enumerate(equipement):
+            print(i, " - ", objects.showInfo())
+            objectIndex.append(str(i))
+
+        choice = str()
+        while(choice not in objectIndex):
+            choice = input("Object to take off: ")
+        print("--------------------------------------------------")
+
+        if(int(choice) == -1):
+            return None
+        else:
+            return equipement[int(choice)]
 
     """ This method allows the player to use a consumable """
     def selectConsumable(self):
