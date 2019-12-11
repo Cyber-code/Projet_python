@@ -1,4 +1,5 @@
 from Equipement import Equipement
+from random import randint
 
 """ Jewels class instantiate jewel object which is used to increase dodge, parry, criticalHit or maxHealth of the player"""
 class Jewels(Equipement):
@@ -13,7 +14,7 @@ class Jewels(Equipement):
     def showInfo(self):
         return Equipement.showInfo(self) + "Dodge: +" + str(self.dodge)+" %, " + "Parry: +" + str(self.parry)+" %, " + "Critical hit: +" + str(self.criticalHit)+" %, "+ "Maximum Health: +" + str(self.maxHealth)+" %)"
 
-def generateJewel(name="strenght_necklace"):
+def generateJewel(name=""):
     if(name == "strenght_necklace"):
         return Jewels(name="Strength necklace", value=50, criticalHit=10)
     elif(name == "resistance_necklace"):
@@ -23,5 +24,5 @@ def generateJewel(name="strenght_necklace"):
     elif(name == "health_necklace"):
         return Jewels(name="Health necklace", value=50, maxHealth=10)
     else:
-        return Jewels(name="Strength necklace", value=50, criticalHit=10)
-
+        items = ["strenght_necklace","resistance_necklace","anticipation_necklace","health_necklace"]
+        return generateJewel(name=items[randint(0,len(items)-1)])

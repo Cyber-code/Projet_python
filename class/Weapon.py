@@ -1,4 +1,5 @@
 from Equipement import Equipement
+from random import randint
 
 """ Weapon class instantiate weapon object which is used to increase damage stat of the player"""
 class Weapon(Equipement):
@@ -9,7 +10,7 @@ class Weapon(Equipement):
     def showInfo(self):
         return Equipement.showInfo(self) + "Damage: +" + str(self.damage) + ")"
 
-def generateWeapon(name="wooden_sword"):
+def generateWeapon(name=""):
     if(name == "wooden_sword"):
         return Weapon(name="Wooden Sword", value = 10, damage=4)
     elif(name == "goldden_sword"):
@@ -25,4 +26,5 @@ def generateWeapon(name="wooden_sword"):
     elif(name == "crossbow"):
         return Weapon(name="Crossbow", value = 300, damage=10)
     else:
-        return Weapon(name="Wooden Sword", value = 10, damage=4)
+        items = ["wooden_sword","goldden_sword","stone_sword","iron_sword","diamond_sword","bow","crossbow"]
+        return generateWeapon(name=items[randint(0,len(items)-1)])

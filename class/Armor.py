@@ -1,4 +1,5 @@
 from Equipement import Equipement
+from random import randint
 
 """ Armor class instantiate armor object (headArmor, chestArmor, armsArmor, legsArmor, footArmor) which is used to increase armor stat of the player"""
 class Armor(Equipement):
@@ -13,7 +14,7 @@ class Armor(Equipement):
     def showInfo(self):
         return Equipement.showInfo(self) + "Armor protection: +" + str(self.armor)+" %)"
 
-def generateArmor(name="leather_helmet"):
+def generateArmor(name=""):
     if(name == "leather_helmet"):
         return Armor(name="Leather Helmet", value=10, armor=2, armorType="head")
     elif(name == "leather_chestplate"):
@@ -68,6 +69,6 @@ def generateArmor(name="leather_helmet"):
         return Armor(name="Diamond Leggings", value=200, armor=22, armorType="legs")
     elif(name == "diamond_boots"):
         return Armor(name="Diamond Boots", value=200, armor=10, armorType="feet")
-
     else:
-        return Armor(name="Leather Helmet", value=10, armor=2, armorType="head")
+        items = ["leather_helmet","leather_chestplate","leather_arms_protection","leather_leggings","leather_boots","golden_helmet","golden_chestplate","golden_arms_protection","golden_leggings","golden_boots","chainmail_helmet","chainmail_chestplate","chainmail_arms_protection","chainmail_leggings","chainmail_boots","iron_helmet","iron_chestplate","iron_arms_protection","iron_leggings","iron_boots","diamond_helmet","diamond_chestplate","diamond_arms_protection","diamond_leggings","diamond_boots"]
+        return generateArmor(name=items[randint(0,len(items)-1)])

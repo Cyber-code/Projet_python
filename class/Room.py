@@ -27,3 +27,8 @@ class Room:
                 print("{} got {}.".format(self.player.name, objects.showInfo()))
                 self.player.inventory.objects.append(objects)
             return True
+
+
+def generateChest():
+    items = []
+    chest = []

@@ -4,6 +4,7 @@ from Consumable import Consumable
 from Weapon import Weapon
 from Armor import Armor
 from Jewels import Jewels
+from random import randint
 
 """ Monster class instantiate a monster object who will fight the player """
 class Monster(Character):
@@ -22,7 +23,7 @@ class Monster(Character):
         self.inventory.objects = []
         return items
 
-def generateMonster(name="zombie"):
+def generateMonster(name=""):
     if(name == "zombie"):
         return Monster(name="Zombie", health=20, shield=2, damageMin=2, damageMax=4, xp=5)
     elif(name == "bowman_skeleton"):
@@ -42,4 +43,5 @@ def generateMonster(name="zombie"):
     elif(name == "ender_dragon"):
         return Monster(name="Ender dragon", health=200, dodge=30, criticalHit=10, damageMin=6, damageMax=15, xp=500)
     else:
-        return Monster(name="Zombie", health=20, shield=2, damageMin=2, damageMax=4, xp=5)
+        items = ["zombie","bowman_skeleton","swordman_skeleton","spider","enderman","zombie_pigman","ghast","blaze","ender_gradon"]
+        return generateMonster(name=items[randint(0,len(items)-1)])

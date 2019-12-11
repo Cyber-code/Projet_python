@@ -4,6 +4,7 @@ from Consumable import generateConsumable
 from Jewels import generateJewel
 from Weapon import generateWeapon
 from Armor import generateArmor
+from random import randint
 
 """ Merchant class instantiate a merchant object that the player can interact with him in order to buy or sell objects """
 class Merchant(Character):
@@ -17,7 +18,7 @@ class Merchant(Character):
         return "\nMerchant: "+ Character.showInfo(self) + "\nMaximum health: "+str(self.maxHealth)+ "\n"
 
 
-def generateMerchant(name="consumable_merchant"):
+def generateMerchant(name=""):
     if(name == "consumable_merchant"):
         merchant = Merchant(name="Consumable Merchant")
         merchant.addItem(generateConsumable(name="potion_mana"))
@@ -43,7 +44,7 @@ def generateMerchant(name="consumable_merchant"):
         merchant.addItem(generateWeapon(name="bow"))
         merchant.addItem(generateWeapon(name="crossbow"))
 
-    else:
+    elif(name == "armor_merchant"):
         merchant = Merchant(name="Armor Merchant")
         merchant.addItem(generateArmor(name="leather_helmet"))
         merchant.addItem(generateArmor(name="leather_chestplate"))
@@ -74,4 +75,7 @@ def generateMerchant(name="consumable_merchant"):
         merchant.addItem(generateArmor(name="diamond_arms_protection"))
         merchant.addItem(generateArmor(name="diamond_leggings"))
         merchant.addItem(generateArmor(name="diamond_boots"))
+    else:
+        items = ["consumable_merchant","jewels_merchant","weapon_merchant","armor_merchant"]
+        return generateMerchant(name=items[randint(0,len(items)-1)])
     return merchant

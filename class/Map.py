@@ -9,13 +9,16 @@ class Map:
         self.player = player
 
     def generateRoom(self):
-        rnd = randint(0,2)
-        if(rnd < 7):
+        rnd = randint(0,99)
+        # 70 % of chance to enter in a battle
+        if(rnd < 70):
             name = ["zombie","bowman_skeleton","swordman_skeleton","spider","enderman","zombie_pigman","ghast","blaze","ender_dragon"]
             mob = generateMonster(name=name[randint(0,len(name)-1)])
-        elif(rnd < 9):
+        # 20 % of chance to meet a merchant
+        elif(rnd < 90):
             name = ["consumable_merchant","jewels_merchant","weapon_merchant","armor_merchant"]
             mob = generateMerchant(name=name[randint(0,len(name)-1)])
+        # 10 % of chance to find a chest
         else:
             mob = None
         return Room(self.player, mob)
