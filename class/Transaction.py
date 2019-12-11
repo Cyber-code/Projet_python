@@ -102,6 +102,7 @@ class Transaction:
         print("--------------------------------------------------")
         return int(choice)
 
+    """ This method equip the player with an object """
     def selectObjectToEquip(self):
         print("\nSelect the object to equip: ")
         print("-1 -  Previous")
@@ -117,7 +118,7 @@ class Transaction:
         print("--------------------------------------------------")
 
         slot = "0"
-        if(self.player.inventory.objects[int(choice)].type in ["jewel","weapon"] and choice != "-1"):
+        if(choice != "-1" and self.player.inventory.objects[int(choice)].type in ["jewel","weapon"]):
             print("\nSelect the slot : ")
             print("1 -  Slot 1")
             print("2 -  Slot 2")
@@ -127,6 +128,7 @@ class Transaction:
 
         return (int(choice), int(slot))
 
+    """ This method allows the player to take off an object """
     def selectObjectToDequip(self):
         print("\nSelect the object to take off: ")
         print("-1 -  Previous")

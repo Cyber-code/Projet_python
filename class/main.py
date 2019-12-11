@@ -9,19 +9,13 @@ from Spell import Spell, generateSpell
 from Battle import Battle
 from Merchant import generateMerchant
 from Transaction import Transaction
+from Map import Map
 
 def main():
-    #name = input("Enter your player's name : ")
-    player = Player(name="Nico")
-    player.addGold(100)
-    player.addItem(generateConsumable())
-    player.addItem(generateWeapon())
-    player.addItem(generateArmor())
-    player.addItem(generateJewel())
-    merchant = generateMerchant("consumable_merchant")
-    transaction = Transaction(player=player, merchant=merchant)
-    transaction.run()
-
-    print(player.showInfo())
+    name = input("Enter your player's name : ")
+    player = Player(name=name)
+    map = Map(player)
+    if(not map.run()):
+        print("Game Over !")
 
 main()
