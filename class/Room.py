@@ -27,6 +27,7 @@ class Room:
             return transaction.run()
         else:
             print("You find a chest !")
+            self.player.statistics.chestsFound += 1
             items = generateChest()
             for objects in items:
                 print("{} got {}.".format(self.player.name, objects.showInfo()))

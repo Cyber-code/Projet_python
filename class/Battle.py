@@ -28,6 +28,9 @@ class Battle:
         # Player alive, monster dead
         if(self.player.isAlive()):
             print("\nWell done, you killed the {}.".format(self.monster.name))
+            if(self.monster.name == "Ender dragon"):
+                self.player.statistics.enderDragonsKilled += 1
+            self.player.statistics.monstersKilled += 1
             self.player.shield = self.player.maxShield  # Reaload the player's shield
 
             items = self.monster.dropItems()

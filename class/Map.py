@@ -26,5 +26,7 @@ class Map:
     def run(self):
         while(True):
             room = self.generateRoom()
+            self.player.updateSuccess()
             if(not room.run()):
+                self.player.updateSuccess()
                 break

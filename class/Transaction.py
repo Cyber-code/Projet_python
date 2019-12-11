@@ -16,6 +16,7 @@ class Transaction:
                 break
         
         print("\nYou leave the transaction.")
+        self.player.statistics.merchantsMet += 1
         return True
 
     """ This method allows the player to choose an action during a transaction """

@@ -7,8 +7,6 @@ from Weapon import generateWeapon
 def main():
     name = input("Enter your player's name : ")
     player = Player(name=name)
-    print(player.showStatistics())
-    print(player.showSuccess())
 
     print("\nSelect the difficulty:")
     print("1 - Easy")
@@ -32,5 +30,7 @@ def main():
     map = Map(player)
     if(not map.run()):
         print("Game Over !")
+        print(player.showStatistics())
+        print(player.showSuccess())
 
 main()

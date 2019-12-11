@@ -44,6 +44,7 @@ class Player(Character):
         if(self.inventory.gold >= item.value):
             self.inventory.gold -= item.value
             self.addItem(item)
+            self.statistics.objectsBought += 1
             return item.value
         else:
             print("\nNot enought gold !\n")
@@ -102,6 +103,7 @@ class Player(Character):
         if(item != None):
             self.inventory.gold += item.value
             self.inventory.objects.remove(item)
+            self.statistics.objectsSold += 1
             return True
         else:
             return False
@@ -131,3 +133,19 @@ class Player(Character):
         for elt in self.success:
             success += self.success[elt].showInfo()
         return "\n{}'s success: {}".format(self.name, success)
+
+    def updateSuccess(self):
+        if(self.statistics.monstersKilled > 9):
+            self.success["monster_hunter"].unlock = True
+        if(self.statistics.merchantsMet > 9):
+            self.success["commercial"].unlock = True
+        if(self.statistics.chestsFound > 0):
+            self.success["lucky"].unlock = True
+        if(self.statistics.objectsBought > 9):
+            self.success["compulsive_buyer"].unlock = True
+        if(self.statistics.objectsSold > 9):
+            self.success["vendor"].unlock = True
+        if(self.statistics.consumablesUsed > 9):
+            self.success["consumer"].unlock = True
+        if(self.statistics.enderDragonsKilled > 0):
+            self.success["the_end"].unlock = True
