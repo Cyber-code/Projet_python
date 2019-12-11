@@ -43,7 +43,7 @@ class Battle:
             return True
         # Player dead, monster alive
         else:
-            print("\nYou has been killed by the {}.".format(self.monster.name))
+            print("\nYou have been killed by the {}.".format(self.monster.name))
             return False
 
 
