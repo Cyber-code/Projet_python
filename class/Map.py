@@ -10,10 +10,10 @@ class Map:
 
     def generateRoom(self):
         rnd = randint(0,2)
-        if(rnd == 0):
+        if(rnd < 7):
             name = ["zombie","bowman_skeleton","swordman_skeleton","spider","enderman","zombie_pigman","ghast","blaze","ender_dragon"]
             mob = generateMonster(name=name[randint(0,len(name)-1)])
-        elif(rnd == 0):
+        elif(rnd < 9):
             name = ["consumable_merchant","jewels_merchant","weapon_merchant","armor_merchant"]
             mob = generateMerchant(name=name[randint(0,len(name)-1)])
         else:

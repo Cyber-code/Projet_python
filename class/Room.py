@@ -22,7 +22,7 @@ class Room:
             return transaction.run()
         else:
             print("You find a chest !")
-            items = [generateConsumable(name="potion_regeneration"), generateConsumable(name="potion_regeneration"), generateWeapon("wooden_sword")]
+            items = [generateConsumable(name="potion_healing"), generateWeapon("wooden_sword")]
             for objects in items:
                 print("{} got {}.".format(self.player.name, objects.showInfo()))
                 self.player.inventory.objects.append(objects)
