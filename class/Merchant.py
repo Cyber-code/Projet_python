@@ -6,8 +6,8 @@ from Weapon import generateWeapon
 from Armor import generateArmor
 from random import randint
 
-""" Merchant class instantiate a merchant object that the player can interact with him in order to buy or sell objects """
 class Merchant(Character):
+    """ Merchant class instantiate a merchant object that the player can interact with him in order to buy or sell objects. """
     def __init__(self, name="Merchant", health=20, shield=0, dodge=0,
                  parry=0, criticalHit=1, mana=10, damageMin=1,
                  damageMax=2, armor=0, xp=0, inventory=Inventory(),
@@ -15,10 +15,12 @@ class Merchant(Character):
         Character.__init__(self, name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, inventory)
 
     def showInfo(self):
+        """ Return a string which are precised parameters of the jewel object. """
         return "\nMerchant: "+ Character.showInfo(self) + "\nMaximum health: "+str(self.maxHealth)+ "\n"
 
 
 def generateMerchant(name=""):
+    """ Return a Merchant object. """
     if(name == "consumable_merchant"):
         merchant = Merchant(name="Consumable Merchant")
         merchant.addItem(generateConsumable(name="potion_mana"))

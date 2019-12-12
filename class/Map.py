@@ -3,12 +3,13 @@ from Merchant import generateMerchant
 from Monster import generateMonster
 from random import randint
 
-""" Map class instantiate a map object where there are rooms """
 class Map:
+    """ Map class instantiate a map object where rooms are generated. """
     def __init__(self, player):
         self.player = player
 
     def generateRoom(self):
+        """ This method generates a room where there are a number of chance that the player could meet a Monster, a Merchant or finding a chest. """
         rnd = randint(0,99)
         # 70 % of chance to enter in a battle
         if(rnd < 70):
@@ -24,6 +25,7 @@ class Map:
         return Room(self.player, mob)
 
     def run(self):
+        """ This method generates rooms while the player is alive. """
         while(True):
             room = self.generateRoom()
             self.player.updateSuccess()
