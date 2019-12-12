@@ -53,74 +53,98 @@ class Battle:
     """ This method allows the player to choose an action during a battle """
     def selectAction(self):
         print("\nSelect your action")
-        print("1 - Attack with weapon")
-        print("2 - Throw a spell")
-        print("3 - Use a consumable")
-        print("4 - Equip with an object")
-        print("5 - Take off an object")
-        print("6 - Show bars (health, shield, mana)")
-        print("7 - Do nothing")
+        print("0  - Do nothing")
+        print("1  - Attack with weapon")
+        print("2  - Throw a spell")
+        print("3  - Use a consumable")
+        print("4  - Equip with an object")
+        print("5  - Take off an object")
+        print("6  - Show bars (health, shield, mana)")
+        print("7  - Show infos")
+        print("8  - Show inventory")
+        print("9  - Show statistics")
+        print("10 - Show success")
 
         choice = str()
-        while(choice not in ["1","2","3","4","5","6","7"]):
+        while(choice not in [str(i) for i in range(11)]):
             choice = input("Your action: ")
 
         print("--------------------------------------------------")
         choice = int(choice)
 
+        # Do nothing
+        if(choice == 0):
+            return (True, 0)
+
         # Fight with weapon
-        if(choice == 1):
+        elif(choice == 1):
             choice2 = self.selectWeapon()
+            # Use weapon in the left hand
             if(choice2 == 1):
                 damages = self.player.hit("leftHand")
-                return (True, damages)
+            # Use weapon in the right hand
             elif(choice2 == 2):
                 damages = self.player.hit("rightHand")
-                return (True, damages)
-            else:
-                return (False, 0)
+            return (True, damages)
+
         # Throw a spell
         elif(choice == 2):
             choice2 = self.selectSpell()
+            # Throw a fireball
             if(choice2 == 1):
                 damages = self.player.throwSpell("Fireball")
                 if (damages == 0):
                     return (False, 0)
                 else:
                     return (True, damages)
+            # Throw a lightning
             elif(choice2 == 2):
                 damages = self.player.throwSpell("Lightning")
                 if (damages == 0):
                     return (False, 0)
                 else:
                     return (True, damages)
-            else:
-                return (False, 0)
+
         # Use a consumable
         elif(choice == 3):
             choice2 = self.selectConsumable()
             if(choice2 != -1):
                 self.player.use(choice2)
-            return (False, 0)
+
         # Equip with an object
         elif(choice == 4):
             (choice2, slot) = self.selectObjectToEquip()
             if(choice2 > -1):
                 self.player.equipItem(self.player.inventory.objects[choice2], slot)
-            return (False, 0)
+        
         # Take off an object
         elif(choice == 5):
             choice2 = self.selectObjectToDequip()
             if(choice2 != None):
                 self.player.dequipItem(choice2)
-            return (False, 0)
+        
         # Show player's bars
         elif(choice == 6):
             print(self.player.showBars())
-            return (False, 0)
-        # Do nothing
-        else:
-            return (True, 0)
+        
+        # Show player's info
+        elif(choice == 7):
+            print(self.player.showInfo())
+        
+        # Show player's inventory
+        elif(choice == 8):
+            print(self.player.showInventory())
+        
+        # Show player's statistics
+        elif(choice == 9):
+            print(self.player.showStatistics())
+        
+        # Show player's success
+        elif(choice == 10):
+            print(self.player.showSuccess())
+        
+        return (False, 0)
+
 
     """ This method allows the player to choose a weapon """
     def selectWeapon(self):
