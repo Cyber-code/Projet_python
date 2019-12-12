@@ -2,13 +2,14 @@ from Interaction import Interaction
 from Merchant import Merchant
 from Player import Player
 
-""" Transaction class instantiate a transaction object where the player buy or objects with a merchant """
 class Transaction(Interaction):
+    """ Transaction class instantiate a transaction object where the player buy or objects with a merchant. """
     def __init__(self, player, merchant):
         Interaction.__init__(self, player, merchant)
 
-    """ This method starts the transaction with the merchant """
     def run(self):
+        """ This method starts the transaction with the merchant. """
+
         print("You meet a {}.".format(self.mob.name.lower()))
         print("You have {} gold.".format(self.player.inventory.gold))
         while(True):
@@ -19,8 +20,9 @@ class Transaction(Interaction):
         self.player.statistics.merchantsMet += 1
         return True
 
-    """ This method allows the player to choose an action during a transaction """
     def selectAction(self):
+        """ This method allows the player to choose an action during a transaction. """
+
         print("\nSelect your action")
         print("0  - Leave transaction")
         print("1  - Buy an object")
@@ -98,6 +100,8 @@ class Transaction(Interaction):
         return False
 
     def selectObjectToBuy(self):
+        """ This method allows the player to choose wich objects on sale from Merchant inventory he could buy. """
+
         print("\nSelect the object to buy: ")
         print("-1 -  Previous")
         objectIndex = ['-1']
@@ -112,6 +116,8 @@ class Transaction(Interaction):
         return int(choice)
 
     def selectObjectTosell(self):
+        """ This method allows the player to choose wich objects he could sell from his inventory. """
+
         print("\nSelect the object to sell: ")
         print("-1 -  Previous")
         objectIndex = ['-1']

@@ -4,8 +4,8 @@ from math import sqrt
 from Statistics import Statistics
 from Success import Success
 
-""" Player class instantiate a player object controled by the user """
 class Player(Character):
+    """ Player class instantiate a player object controled by the user. """
     def __init__(self, name="Player", health=20, shield=10, dodge=0,
                  parry=0, criticalHit=1, mana=10, damageMin=1,
                  damageMax=2, armor=0, xp=0, inventory=Inventory()):
@@ -14,11 +14,12 @@ class Player(Character):
         self.statistics = Statistics()
         self.success = {"monster_hunter":Success(name="Monster hunter"), "commercial":Success(name="Commercial"), "lucky":Success(name="Lucky"), "compulsive_buyer":Success(name="Compulsive buyer"), "vendor":Success(name="Vendor on the run"), "consumer":Success(name="Consumer"), "the_end":Success(name="The End")}
 
-    """ 
-    This method is called when the player killed
-    monsters and he earn some xp
-    """
+
     def addXp(self, xp):
+        """ 
+        This method is used to give a lot of xp to the player and to update his level.
+        If the player gains a level, then his stats are increased.
+        """
         level = self.level
         self.xp += xp
         # From lvl 0 to 16
@@ -36,11 +37,12 @@ class Player(Character):
                 self.levelUp()
                 print(i)
 
-    """ 
-    This method allows the player to buy an items, return the value of the item if it is bought or return 0 otherwise 
-    If the player has enought gold, then the item is added to player's inventory
-    """
+
     def buyItem(self, item):
+        """ 
+        This method allows the player to buy an items, return the value of the item if it is bought or return 0 otherwise.
+        If the player has enought gold, then the item is added to player's inventory.
+        """
         if(self.inventory.gold >= item.value):
             self.inventory.gold -= item.value
             self.addItem(item)
@@ -50,8 +52,9 @@ class Player(Character):
             print("\nNot enought gold !\n")
             return 0
 
-    """ This methods allows the player to take off a weapon, jewel or armor """
+
     def dequipItem(self, item):
+        """ This methods allows the player to take off a weapon, jewel or armor. """
         if(item != None):
             if(item == self.inventory.weapon["leftHand"]):
                 self.inventory.weapon["leftHand"] = None
@@ -78,8 +81,9 @@ class Player(Character):
         else:
             return False
 
-    """ This methods allows the player to equip himself with a weapon, jewel or armor """
+
     def equipItem(self, item, slot):
+        """ This methods allows the player to equip himself with a weapon, jewel or armor. """
         if(item in self.inventory.objects):
             if(item.type == "weapon" and slot == 1):
                 self.setWeapon(item, slot="leftHand")
@@ -98,8 +102,9 @@ class Player(Character):
         else:
             return False
 
-    """ This method allows the player to sell an items, return True if the item is not None or return False otherwise """
+
     def sellItem(self, item):
+        """ This method allows the player to sell an items, return True if the item is not None or return False otherwise. """
         if(item != None):
             self.inventory.gold += item.value
             self.inventory.objects.remove(item)
@@ -109,8 +114,8 @@ class Player(Character):
             return False
 
 
-    """ Only for the player, when he earns enought xp, then he gains a level """
     def levelUp(self):
+        """ This method increases player stats when he gains a level. """
         factor = 1.2
         self.maxHealth = int(factor*self.maxHealth)
         self.health = int(factor*self.health)
@@ -126,15 +131,20 @@ class Player(Character):
         self.armor += 1
 
     def showStatistics(self):
+        """ Return a string which contains player's statistics of the game. """
         return "\n{}'s statistics:\nMonsters killed: {}\nMerchants met: {}\nChests found: {}\nObjects bought: {}\nObjects sold: {}\nConsumables used: {}\nEnder dragon killed: {}\n".format(self.name, self.statistics.monstersKilled, self.statistics.merchantsMet, self.statistics.chestsFound, self.statistics.objectsBought, self.statistics.objectsSold, self.statistics.consumablesUsed, self.statistics.enderDragonsKilled)
 
+
     def showSuccess(self):
+        """ Return a string which contains player's unlocked success. """
         success = ""
         for elt in self.success:
             success += self.success[elt].showInfo()
         return "\n{}'s success: {}".format(self.name, success)
 
+
     def updateSuccess(self):
+        """ This method updates unlocked success if the player has required statitics. """
         if(self.statistics.monstersKilled > 9):
             self.success["monster_hunter"].unlock = True
         if(self.statistics.merchantsMet > 9):

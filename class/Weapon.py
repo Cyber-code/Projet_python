@@ -8,9 +8,11 @@ class Weapon(Equipement):
         self.damage = damage
 
     def showInfo(self):
+        """ This method return a string containing weapon's parameters. """
         return Equipement.showInfo(self) + "Damage: +" + str(self.damage) + ")"
 
 def generateWeapon(name=""):
+    """ Return a Weapon object. """
     if(name == "wooden_sword"):
         return Weapon(name="Wooden Sword", value = 10, damage=4)
     elif(name == "goldden_sword"):

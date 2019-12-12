@@ -9,6 +9,11 @@ from Weapon import generateWeapon
 from random import expovariate, randint
 
 class Room:
+    """ 
+    This method instantiate a room object where there is a Battle or a Transaction depending on the mob (Monster or Merchant). 
+    The player could also find a chest in the room so that there is not Battle or Transaction.
+    """
+    
     def __init__(self, player, mob):
         self.player = player
         self.mob = mob
