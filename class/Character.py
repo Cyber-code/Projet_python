@@ -4,6 +4,7 @@ from math import sqrt
 from Spell import generateSpell
 
 class Character:
+    """ Chacracter class instantiate character object who can be a Player, a Monster or a Merchant. """
     def __init__(self, name, health, shield, dodge,
                  parry, criticalHit, mana, damageMin,
                  damageMax, armor, xp, inventory):
@@ -28,37 +29,48 @@ class Character:
 
         self.addXp(xp) # To update the level in function of xp
 
-    """ This methods is used to regenerate an amount of health to the character """
+
     def addHealth(self, health):
+        """ This method is used to regenerate an amount of health to the character whithout exceeding the maximun amount of health (maxHealth). """
         if(self.health + health >= self.maxHealth):
             self.health = self.maxHealth
         else:
             self.health += health
+        return True
 
-    """ This methods is used to give such gold to the character """
+
     def addGold(self, gold=0):
+        """ This method is used to give a lot of gold to the character. """
         self.inventory.gold += gold
+        return True
 
-    """ This method is used to add an item/object to the player's inventory """
+
     def addItem(self, item):
+        """ This method is used to add an item/object to the character's inventory. """
         self.inventory.objects.append(item)
+        return True
 
-    """ This methods is used to regenerate an amount of mana to the character """
+
     def addMana(self, mana):
+        """ This method is used to regenerate an amount of mana to the character whithout exceeding the maximun amount of mana (maxMana). """
         if(self.mana + mana >= self.maxMana):
             self.mana = self.maxMana
         else:
             self.mana += mana
+        return True
 
-    """ When the player uses a consumable which regerate his shield """
+
     def addShield(self, shield):
+        """ This method is used to regenerate an amount of shield to the character whithout exceeding the maximun amount of shield (maxShield). """
         if(self.shield + shield >= self.maxShield):
             self.shield = self.maxShield
         else:
             self.shield += shield
+        return True
 
-    """ This method is called when the player killed monsters and he earn some xp"""
+
     def addXp(self, xp):
+        """ This method is used to give a lot of xp to the character and to update his level. """
         self.xp += xp
         # From lvl 0 to 16
         if(self.xp < 353):
@@ -69,10 +81,11 @@ class Character:
         # From 32 to ...
         else:
             self.level = int((162.5 + sqrt((162.5)**2 -39960+18*self.xp))//9)
+        return True
 
 
-    """ This method calculates damages given by a Character """
     def hit(self, hand="leftHand"):
+        """ This method calculates the amount of damages given by the character depending on the choosen hand (leftHand or rightHand). """
         damages = int()
         if (hand in ["leftHand", "rightHand"] and self.inventory.weapon[hand] != None):
             damages += self.inventory.weapon[hand].damage
@@ -82,8 +95,9 @@ class Character:
             print("Critical hit !")
         return damages
 
-    """ This method selects spell and calculates its damages """
+
     def throwSpell(self, spellName="Fireball"):
+        """ This method calculates the amount of damages given by the character depending on the choosen spell (lightning or fireball). """
         if(spellName == "Lightning"):
             spell = generateSpell("lightning")
         else:
@@ -102,8 +116,14 @@ class Character:
         return damages
 
 
-    """ This method calculate the getting amount of damages """
     def getDamages(self, damages):
+        """ 
+        This method calculate incoming amount of damages and could be deleted or reduced if the character dodges or parries the attack.
+        Damages are also reduces by percentage of armor of the player.
+        Damages are shared first on the character's shield and after on his health. 
+
+        Return True if the character is still alive.
+        """
         if(randint(0, 100) <= self.dodge):
             damages = 0
             print(self.name + " dodges the attack.")
@@ -120,16 +140,21 @@ class Character:
 
         return self.isAlive()
 
-    """ This method return True if the character is alive or False else """
+
     def isAlive(self):
+        """ Return True if the character has more than 0 health or False otherwise. """
         if self.health > 0:
             return True
         else:
             return False
 
 
-    """ This method equip the character with a weapon """
     def setWeapon(self, item, slot="leftHand"):
+        """ 
+        Replace the actual weapon in the character's inventory and equip the character with a weapon in the chosen slot 
+        (leftHand or rightHand).
+        """
+
         if (item.type == "weapon" and slot in ["leftHand", "rightHand"]):
             if (self.inventory.weapon[slot] != None):
                 self.inventory.objects.append(self.inventory.weapon[slot]) # Replace the actual left or right weapon to the inventory (player's list of objects)
@@ -139,8 +164,13 @@ class Character:
         else:
             return False
 
-    """ This method equip the character with a jewel """
+
     def setJewel(self, item, slot="jewel1"):
+        """ 
+        Replace the actual jewel in the character's inventory and equip the character with a jewel in the chosen slot 
+        (jewel1 or jewel2).
+        """
+
         if (item.type == "jewel" and slot in ["jewel1", "jewel2"]):
             if (self.inventory.jewels[slot] != None):
                 # Restore the default character parameters
@@ -162,8 +192,12 @@ class Character:
         else:
             return False
 
-    """ This method equip the character with an armor """
+
     def setArmor(self, item):
+        """ 
+        Replace the actual armor in the character's inventory and equip the character with an armor in the chosen slot 
+        (head, chest, arms, legs or feet).
+        """
         if (item.type in ["head", "chest", "arms", "legs", "feet"]):
             if (self.inventory.armor[item.type] != None):
                 self.armor -= self.inventory.armor[item.type].armor
@@ -175,16 +209,18 @@ class Character:
             return False
 
 
-    """ This method shows player's health, shield and mana """
     def showBars(self):
+        """ This method return a string containing character's health, shield and mana. """
         return "\n{} (lvl {}, {} xp)".format(self.name, self.level, self.xp) + "\nHealth: {} / {}".format(self.health, self.maxHealth) + "\nShield: {} / {}".format(self.shield, self.maxShield) + "\nMana: {} / {}".format(self.mana, self.maxMana)
 
 
     def showInfo(self):
+        """ This method return a string containing character's parameters. """
         return self.showBars() + "\nDamages: {} - {}\nDodge: {} %\nParry: {} %\nCritical hit: {} %\nArmor: {} %\n".format(self.damageMin, self.damageMax, self.dodge, self.parry, self.criticalHit, self.armor)
 
-    """ This method shows the whole player's inventory """
+
     def showInventory(self):
+        """ This method return a string containing character's inventory. """
         leftHand = "\n\nLeft hand weapon: "
         if(self.inventory.weapon["leftHand"] == None):
             leftHand += str(None)
@@ -255,7 +291,12 @@ class Character:
 
         return "\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name) + "\nGold: "+ str(self.inventory.gold) + leftHand + rightHand + jewel1 + jewel2 + headArmor + chestArmor + armsArmor + legsArmor + feetArmor + objects + "\n" + "".join(["-" for i in range(len("\n\n---------------------------------------- {}'s inventory ----------------------------------------".format(self.name))-1)])
 
+
     def use(self, consumableIndex):
+        """ 
+        This method allows the character to use a consumable and pop it from its inventory. 
+        Return True if this object is a consumable or return False otherwise.
+        """
         if(self.inventory.objects[consumableIndex].type == "consumable"):
             self.addHealth(self.inventory.objects[consumableIndex].health)
             self.addMana(self.inventory.objects[consumableIndex].mana)
@@ -263,5 +304,7 @@ class Character:
             self.addXp(self.inventory.objects[consumableIndex].xp)
 
             self.inventory.objects.pop(consumableIndex)
+            return True
 
-        return False
+        else:
+            return False

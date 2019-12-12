@@ -1,8 +1,12 @@
 from Object import Object
 from random import randint
 
-""" Consumable class instantiate consumable object which is used to restore health, shield, mana or xp of the player"""
 class Consumable(Object):
+    """ 
+    Consumable class instantiate consumable object which is used to restore health, shield, mana or xp of the character.
+    Consumables are used just use one time.
+    """
+
     def __init__(self, name="Empty bottle", value=0, health=0, shield=0, mana=0, xp=0):
         Object.__init__(self, name, value, typeObject="consumable")
         self.health = health
@@ -12,9 +16,12 @@ class Consumable(Object):
 
 
     def showInfo(self):
+        """ Return a string which are precised parameters of the consumable object. """
         return Object.showInfo(self) + "Health: +"+ str(self.health)+" PV" + ", Shield: +"+str(self.shield) + ", Mana: +"+str(self.mana) + ", Xp: +"+str(self.xp) +")"
 
 def generateConsumable(name=""):
+    """ Return a Consumable object. """
+
     if(name == "potion_healing"):
         return Consumable(name="Potion of Healing", value=2, health=10)
     elif(name == "potion_mana"):

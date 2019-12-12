@@ -3,11 +3,11 @@ from Player import Player
 from Consumable import generateConsumable
 from Weapon import generateWeapon
 
-""" Entry point of the game """
 def main():
     name = input("Enter your player's name : ")
     player = Player(name=name)
 
+    # The player choose the difficulty
     print("\nSelect the difficulty:")
     print("1 - Easy")
     print("2 - Medium")
@@ -27,6 +27,7 @@ def main():
     if(difficulty < 2):
         player.addGold(10)
 
+    # Launching of the game
     map = Map(player)
     if(not map.run()):
         print("Game Over !")

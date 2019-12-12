@@ -1,8 +1,14 @@
 from Equipement import Equipement
 from random import randint
 
-""" Armor class instantiate armor object (headArmor, chestArmor, armsArmor, legsArmor, footArmor) which is used to increase armor stat of the player"""
 class Armor(Equipement):
+    """ 
+    Armor class instantiate armor object (headArmor, chestArmor, armsArmor, legsArmor, footArmor) 
+    which are used to increase armor of the player. Armor of the player reduce incoming damages by a percentage.
+    There are armor type (precised in the list ["head", "chest", "arms", "legs", "feet"]) in order to define wich 
+    armor can be place in the correct slot of the player's inventory.
+    """
+
     def __init__(self, name="Colander", value=10, armor=1, armorType="head"):
         if (armorType.lower() not in ["head", "chest", "arms", "legs", "feet"]):
             raise ValueError("The armor type is not conform, please choose armorType equals at head, chest, arms, legs or feet.")
@@ -12,9 +18,11 @@ class Armor(Equipement):
 
 
     def showInfo(self):
+        """ Return a string which are precised parameters of the armor object. """
         return Equipement.showInfo(self) + "Armor protection: +" + str(self.armor)+" %)"
 
 def generateArmor(name=""):
+    """ Return an Armor object. """
     if(name == "leather_helmet"):
         return Armor(name="Leather Helmet", value=10, armor=2, armorType="head")
     elif(name == "leather_chestplate"):

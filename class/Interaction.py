@@ -1,10 +1,16 @@
 class Interaction:
+    """ Interaction class is the super class of Battle and Transaction classes. """
     def __init__(self, player, mob):
         self.player = player
         self.mob = mob
 
-    """ This method allows the player to use a consumable """
+
     def selectConsumable(self):
+        """ 
+        This method allows the player to choose a consumable in his inventory. 
+        Return the consumable index of the inventory or -1 if the player want to come back.
+        """
+
         print("\nSelect the consumable to use: ")
         print("-1 -  Previous")
         consumableIndex = ['-1']
@@ -19,8 +25,12 @@ class Interaction:
         print("--------------------------------------------------")
         return int(choice)
 
-    """ This method allows the player to take off an object """
+
     def selectObjectToDequip(self):
+        """ 
+        This method allows the player to choose to take off wich equipement must return to his inventory. 
+        Return the equipement index of the inventory or -1 if the player want to come back.
+        """
         print("\nSelect the object to take off: ")
         print("-1 -  Previous")
         objectIndex = ['-1']
@@ -40,8 +50,11 @@ class Interaction:
             return equipement[int(choice)]
 
 
-    """ This method equip the player with an object """
     def selectObjectToEquip(self):
+        """ 
+        This method allows the player to choose to equip with an equipement from his inventory. 
+        Return the equipement index of the inventory or -1 if the player want to come back.
+        """
         print("\nSelect the object to equip: ")
         print("-1 -  Previous")
         objectIndex = ['-1']

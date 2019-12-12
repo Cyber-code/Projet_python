@@ -1,11 +1,8 @@
-from random import randint
-from Armor import generateArmor
-from Consumable import generateConsumable
-from Jewels import generateJewel
-from Weapon import generateWeapon
-
-""" Inventory class instantiate a inventory object which is a character's caracteristic """
 class Inventory:
+    """
+    Inventory class instantiate a inventory object which is a character's caracteristic.
+    It contains the list of objects, amount of gold, armor slot, jewels slot and weapon slot.
+    """
     def __init__(self, objects=[], gold=0, leftHand=None, rigthHand=None, jewel1=None, jewel2=None, headArmor=None, chestArmor=None, armsArmor=None, legsArmor=None, feetArmor=None):
         self.objects = []  # objects is a list of weapons, jewels, armors and consumables
         self.gold = gold
@@ -15,9 +12,5 @@ class Inventory:
 
 
     def showInfo(self):
+        """ Return a string which are precised parameters of the consumable object. """
         return "\nInventory" + "\nGold: "+str(self.gold)+" coins" + "\nObjects: "+str(self.objects) +"\nWeapon: "+str(self.weapon) + "\nJewels: "+str(self.jewels)+" %" + "\nArmor: "+str(self.armor)+ "\n"
-
-# Under construction, it is used for tests
-def generateInventory():
-    objects = [generateArmor(), generateConsumable(), generateJewel(), generateWeapon()]
-    return Inventory(objects=objects, gold=randint(0, 10))

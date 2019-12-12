@@ -2,13 +2,14 @@ from Interaction import Interaction
 from Monster import Monster
 from Player import Player
 
-""" Battle class instantiate a battle object where the player figth a monster """
 class Battle(Interaction):
+    """ Battle class instantiate a battle object where the player figth a monster. """
+
     def __init__(self, player, monster):
         Interaction.__init__(self, player, monster)
 
-    """ This method launch the battle """
     def run(self):
+        """ This method launch the battle. """
         print("\nYou enter into the battle against a {}.".format(self.mob.name))
         print(self.mob.showInfo())
         while(self.mob.isAlive() and self.player.isAlive()):
@@ -20,6 +21,7 @@ class Battle(Interaction):
             self.mob.getDamages(damages)
             print(self.mob.showBars())
 
+            # Monster attacks the player if he is still alive
             if(self.mob.isAlive()):
                 print("\n",self.mob.name," attacks !")
                 self.player.getDamages(self.mob.hit())
@@ -44,14 +46,16 @@ class Battle(Interaction):
             
             print(self.player.showInventory())
             return True
+
         # Player dead, monster alive
         else:
             print("\nYou have been killed by the {}.".format(self.mob.name))
             return False
 
 
-    """ This method allows the player to choose an action during a battle """
     def selectAction(self):
+        """ This method allows the player to choose an action during a battle. """
+
         print("\nSelect your action")
         print("0  - Do nothing")
         print("1  - Attack with weapon")
@@ -85,6 +89,9 @@ class Battle(Interaction):
             # Use weapon in the right hand
             elif(choice2 == 2):
                 damages = self.player.hit("rightHand")
+            # Previous
+            else:
+                return (False, 0)
             return (True, damages)
 
         # Throw a spell
@@ -104,6 +111,9 @@ class Battle(Interaction):
                     return (False, 0)
                 else:
                     return (True, damages)
+            # Previous
+            else:
+                return (False, 0)
 
         # Use a consumable
         elif(choice == 3):
@@ -146,36 +156,43 @@ class Battle(Interaction):
         return (False, 0)
 
 
-    """ This method allows the player to choose a weapon """
     def selectWeapon(self):
+        """ This method allows the player to choose a weapon depending on the hand. """
+
         print("\nSelect your weapon:")
-        print("0 - Previous")
+        print("-1 - Previous")
+
+        # To display the weapon in the left hand
         if(self.player.inventory.weapon["leftHand"] == None):
             leftHand = "None"
         else:
             leftHand = self.player.inventory.weapon["leftHand"].showInfo()
-        print("1 - Attack with {}".format(leftHand))
+        print("1  - Attack with {}".format(leftHand))
+
+        # To display the weapon in the right hand
         if(self.player.inventory.weapon["rightHand"] == None):
             rightHand = "None"
         else:
             rightHand = self.player.inventory.weapon["rightHand"].showInfo()
-        print("2 - Attack with {}".format(rightHand))
+        print("2  - Attack with {}".format(rightHand))
 
         choice = str()
-        while(choice not in ["0","1","2"]):
+        while(choice not in ["-1","1","2"]):
             choice = input("Your weapon: ")
         print("--------------------------------------------------")
         return (int(choice))
         
-    """ This method allows the player to choose a spell """
+
     def selectSpell(self):
+        """ This method allows the player to choose a spell. """
+
         print("\nSelect the spell to throw: ")
-        print("0 - Previous")
-        print("1 - Throw a Fireball  (Damage: 2, Mana: 5)")
-        print("2 - Throw a Lightning (Damage: 5, Mana: 10)")
+        print("-1 - Previous")
+        print("1  - Throw a Fireball  (Damage: 2, Mana: 5)")
+        print("2  - Throw a Lightning (Damage: 5, Mana: 10)")
 
         choice = str()
-        while(choice not in ["0","1","2"]):
+        while(choice not in ["-1","1","2"]):
             choice = input("Your spell: ")
         print("--------------------------------------------------")
         return int(choice)
