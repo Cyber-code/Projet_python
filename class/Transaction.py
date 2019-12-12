@@ -1,15 +1,15 @@
+from Interaction import Interaction
 from Merchant import Merchant
 from Player import Player
 
 """ Transaction class instantiate a transaction object where the player buy or objects with a merchant """
-class Transaction:
+class Transaction(Interaction):
     def __init__(self, player, merchant):
-        self.player = player
-        self.merchant = merchant
+        Interaction.__init__(self, player, merchant)
 
     """ This method starts the transaction with the merchant """
     def run(self):
-        print("You meet a {}.".format(self.merchant.name.lower()))
+        print("You meet a {}.".format(self.mob.name.lower()))
         print("You have {} gold.".format(self.player.inventory.gold))
         while(True):
             if(self.selectAction()):
@@ -49,7 +49,7 @@ class Transaction:
         elif(choice == 1):
             choice2 = self.selectObjectToBuy()
             if(choice2 > -1):
-                self.player.buyItem(self.merchant.inventory.objects[choice2])
+                self.player.buyItem(self.mob.inventory.objects[choice2])
 
         # Sell an object
         elif(choice == 2):
@@ -77,11 +77,11 @@ class Transaction:
 
         # Show player's bars
         elif(choice == 6):
-            print(self.player.showInventory())
+            print(self.player.showBars())
 
         # Show player's info
         elif(choice == 7):
-            print(self.player.showInventory())
+            print(self.player.showInfo())
 
         # Show player's inventory
         elif(choice == 8):
@@ -89,11 +89,11 @@ class Transaction:
         
         # Show player's statistics
         elif(choice == 9):
-            print(self.player.showInventory())
+            print(self.player.showStatistics())
 
         # Show player's success
         elif(choice == 10):
-            print(self.player.showInventory())
+            print(self.player.showSuccess())
         
         return False
 
@@ -101,7 +101,7 @@ class Transaction:
         print("\nSelect the object to buy: ")
         print("-1 -  Previous")
         objectIndex = ['-1']
-        for i,objects in enumerate(self.merchant.inventory.objects):
+        for i,objects in enumerate(self.mob.inventory.objects):
             print(i, " - ", objects.showInfo())
             objectIndex.append(str(i))
 
@@ -122,67 +122,5 @@ class Transaction:
         choice = str()
         while(choice not in objectIndex):
             choice = input("Object to sell: ")
-        print("--------------------------------------------------")
-        return int(choice)
-
-    """ This method equip the player with an object """
-    def selectObjectToEquip(self):
-        print("\nSelect the object to equip: ")
-        print("-1 -  Previous")
-        objectIndex = ['-1']
-        for i,objects in enumerate(self.player.inventory.objects):
-            if(objects.type in ["head","chest","arms","legs","feet","weapon","jewel"]):
-                print(i, " - ", objects.showInfo())
-                objectIndex.append(str(i))
-
-        choice = str()
-        while(choice not in objectIndex):
-            choice = input("Object to equip: ")
-        print("--------------------------------------------------")
-
-        slot = "0"
-        if(choice != "-1" and self.player.inventory.objects[int(choice)].type in ["jewel","weapon"]):
-            print("\nSelect the slot : ")
-            print("1 -  Slot 1")
-            print("2 -  Slot 2")
-            while(slot not in ["1","2"]):
-                slot = input("Slot : ")
-            print("--------------------------------------------------")
-
-        return (int(choice), int(slot))
-
-    """ This method allows the player to take off an object """
-    def selectObjectToDequip(self):
-        print("\nSelect the object to take off: ")
-        print("-1 -  Previous")
-        objectIndex = ['-1']
-        equipement = [obj for obj in [self.player.inventory.weapon["leftHand"], self.player.inventory.weapon["rightHand"], self.player.inventory.jewels["jewel1"], self.player.inventory.jewels["jewel2"], self.player.inventory.armor["head"], self.player.inventory.armor["chest"], self.player.inventory.armor["arms"], self.player.inventory.armor["legs"], self.player.inventory.armor["feet"]] if obj != None]
-        for i,objects in enumerate(equipement):
-            print(i, " - ", objects.showInfo())
-            objectIndex.append(str(i))
-
-        choice = str()
-        while(choice not in objectIndex):
-            choice = input("Object to take off: ")
-        print("--------------------------------------------------")
-
-        if(int(choice) == -1):
-            return None
-        else:
-            return equipement[int(choice)]
-
-    """ This method allows the player to use a consumable """
-    def selectConsumable(self):
-        print("\nSelect the consumable to use: ")
-        print("-1 -  Previous")
-        consumableIndex = ['-1']
-        for i,objects in enumerate(self.player.inventory.objects):
-            if(objects.type == "consumable"):
-                print(i, " - ", objects.showInfo())
-                consumableIndex.append(str(i))
-
-        choice = str()
-        while(choice not in consumableIndex):
-            choice = input("Consumable to use: ")
         print("--------------------------------------------------")
         return int(choice)
