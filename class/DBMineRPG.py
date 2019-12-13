@@ -79,7 +79,7 @@ def insertInventoryData(id_player, gold, leftHand, rightHand, jewel1, jewel2, he
 def insertObjectData(id_player, name):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    cursor.execute("""INSERT INTO objects(id_player, name) VALUES(?, ?)""",(id_player, name))
+    cursor.execute("""INSERT INTO objects(id_player, name) VALUES(?, ?)""", (id_player, name))
     bdd.commit()
     bdd.close()
 
@@ -114,8 +114,8 @@ def getId(name):
     cursor = bdd.cursor()
     data = tuple()
     for row in cursor.execute('SELECT * FROM player'):
-        if(row[0] == name):
-            data = row
+        if(row[1] == name):
+            data = row[0]
     bdd.commit()
     bdd.close()
     return data

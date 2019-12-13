@@ -66,14 +66,14 @@ def main():
             feet = player.inventory.armor["feet"].libelle
 
         insertPlayerData(player.name, player.health, player.shield, player.dodge, player.parry, player.criticalHit, player.mana, player.damageMin, player.damageMax, player.armor, player.xp, player.level, player.maxHealth, player.maxShield, player.maxMana)
-        #insertInventoryData(getId(player.name), player.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
-        #insertStatisticsData(getId(player.name), player.statistics.monstersKilled, player.statistics.merchantsMet, player.statistics.chestsFound, player.statistics.objectsBought, player.statistics.objectsSold, player.statistics.consumablesUsed, player.statistics.enderDragonsKilled)
-        #for obj in player.inventory.objects:
-        #    insertObjectData(getId(player.name), obj.libelle)
+        insertInventoryData(getId(player.name), player.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
+        insertStatisticsData(getId(player.name), player.statistics.monstersKilled, player.statistics.merchantsMet, player.statistics.chestsFound, player.statistics.objectsBought, player.statistics.objectsSold, player.statistics.consumablesUsed, player.statistics.enderDragonsKilled)
+        for obj in player.inventory.objects:
+            insertObjectData(getId(player.name), obj.libelle)
 
         print(getPlayerData(player.name))
-        #print(getInventoryData(getId(player.name)))
-        #print(getStatisticsData(getId(player.name)))
-        #print(getObjectData(getId(player.name)))
+        print(getInventoryData(getId(player.name)))
+        print(getStatisticsData(getId(player.name)))
+        print(getObjectData(getId(player.name)))
         
 main()
