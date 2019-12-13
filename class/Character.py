@@ -131,7 +131,14 @@ class Character:
             damages = int(damages * 0.3)
             print(self.name + " parries the attack, damages are reduced by 70 %.")
 
-        damages = int(damages * (1 - self.armor/100))
+        totalArmor = self.armor
+        for slot in self.inventory.armor:
+            if(self.inventory.armor[slot] != None):
+                totalArmor += self.inventory.armor[slot].armor
+        if(totalArmor > 90):
+            totalArmor = 90
+
+        damages = int(damages * (1 - totalArmor/100))
         if(self.shield - damages < 0):
             self.health = self.health - (damages - self.shield)
             self.shield = 0
@@ -200,10 +207,8 @@ class Character:
         """
         if (item.type in ["head", "chest", "arms", "legs", "feet"]):
             if (self.inventory.armor[item.type] != None):
-                self.armor -= self.inventory.armor[item.type].armor
                 self.inventory.objects.append(self.inventory.armor[item.type]) # Replace the actual armor to the inventory (player's list of objects)
             self.inventory.armor[item.type] = item # Set the new armor
-            self.armor += self.inventory.armor[item.type].armor
             return True
         else:
             return False
@@ -216,7 +221,13 @@ class Character:
 
     def showInfo(self):
         """ This method return a string containing character's parameters. """
-        return self.showBars() + "\nDamages: {} - {}\nDodge: {} %\nParry: {} %\nCritical hit: {} %\nArmor: {} %\n".format(self.damageMin, self.damageMax, self.dodge, self.parry, self.criticalHit, self.armor)
+        totalArmor = self.armor
+        for slot in self.inventory.armor:
+            if(self.inventory.armor[slot] != None):
+                totalArmor += self.inventory.armor[slot].armor
+        if(totalArmor > 90):
+            totalArmor = 90
+        return self.showBars() + "\nDamages: {} - {}\nDodge: {} %\nParry: {} %\nCritical hit: {} %\nArmor: {} %\n".format(self.damageMin, self.damageMax, self.dodge, self.parry, self.criticalHit, totalArmor)
 
 
     def showInventory(self):
