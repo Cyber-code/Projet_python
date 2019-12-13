@@ -57,26 +57,36 @@ class Player(Character):
         """ This methods allows the player to take off a weapon, jewel or armor. """
         if(item != None):
             if(item == self.inventory.weapon["leftHand"]):
-                self.inventory.weapon["leftHand"] = None
+                self.setWeapon(item=None, slot="leftHand")
+
             elif(item == self.inventory.weapon["rightHand"]):
-                self.inventory.weapon["rightHand"] = None
+                self.setWeapon(item=None, slot="rightHand")
+
             elif(item == self.inventory.jewels["jewel1"]):
-                self.inventory.jewels["jewel1"] = None
+                self.setJewel(item=None, slot="jewel1")
+
             elif(item == self.inventory.jewels["jewel2"]):
-                self.inventory.jewels["jewel2"] = None
+                self.setJewel(item=None, slot="jewel2")
+
             elif(item == self.inventory.armor["head"]):
                 self.inventory.armor["head"] = None
+                self.addItem(item)
+
             elif(item == self.inventory.armor["chest"]):
                 self.inventory.armor["chest"] = None
+                self.addItem(item)
+
             elif(item == self.inventory.armor["arms"]):
                 self.inventory.armor["arms"] = None
+                self.addItem(item)
+
             elif(item == self.inventory.armor["legs"]):
                 self.inventory.armor["legs"] = None
+                self.addItem(item)
+
             elif(item == self.inventory.armor["feet"]):
                 self.inventory.armor["feet"] = None
-            else:
-                pass
-            self.addItem(item)
+                self.addItem(item)
             return True
         else:
             return False

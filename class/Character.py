@@ -162,7 +162,7 @@ class Character:
         (leftHand or rightHand).
         """
 
-        if (item.type == "weapon" and slot in ["leftHand", "rightHand"]):
+        if (item == None or (item.type == "weapon" and slot in ["leftHand", "rightHand"])):
             if (self.inventory.weapon[slot] != None):
                 self.inventory.objects.append(self.inventory.weapon[slot]) # Replace the actual left or right weapon to the inventory (player's list of objects)
 
@@ -178,23 +178,26 @@ class Character:
         (jewel1 or jewel2).
         """
 
-        if (item.type == "jewel" and slot in ["jewel1", "jewel2"]):
+        if (item == None or (item.type == "jewel" and slot in ["jewel1", "jewel2"])):
             if (self.inventory.jewels[slot] != None):
                 # Restore the default character parameters
                 self.dodge -= self.inventory.jewels[slot].dodge
                 self.parry -= self.inventory.jewels[slot].parry
                 self.criticalHit -= self.inventory.jewels[slot].criticalHit
                 self.maxHealth -= self.inventory.jewels[slot].maxHealth
+                self.health -= self.inventory.jewels[slot].maxHealth
 
                 self.inventory.objects.append(self.inventory.jewels[slot]) # Replace the actual jewel to the inventory (player's list of objects)
             
             self.inventory.jewels[slot] = item # Set the new jewel
             
             # Set the new character parameters
-            self.dodge += self.inventory.jewels[slot].dodge
-            self.parry += self.inventory.jewels[slot].parry
-            self.criticalHit += self.inventory.jewels[slot].criticalHit
-            self.maxHealth += self.inventory.jewels[slot].maxHealth
+            if(item != None):
+                self.dodge += self.inventory.jewels[slot].dodge
+                self.parry += self.inventory.jewels[slot].parry
+                self.criticalHit += self.inventory.jewels[slot].criticalHit
+                self.maxHealth += self.inventory.jewels[slot].maxHealth
+                self.health += self.inventory.jewels[slot].maxHealth
             return True
         else:
             return False
