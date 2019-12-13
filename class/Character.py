@@ -224,13 +224,28 @@ class Character:
 
     def showInfo(self):
         """ This method return a string containing character's parameters. """
+
+        # Calculate the minimum and maximum damages that the character can given
+        damageMin = self.damageMin
+        damageMax = self.damageMax
+        if(self.inventory.weapon["leftHand"] != None and self.inventory.weapon["rightHand"] != None):
+            damageMin += min(self.inventory.weapon["leftHand"].damage, self.inventory.weapon["rightHand"].damage)
+            damageMax += max(self.inventory.weapon["leftHand"].damage, self.inventory.weapon["rightHand"].damage)
+        elif(self.inventory.weapon["leftHand"] != None):
+            damageMin += self.inventory.weapon["leftHand"].damage
+            damageMax += self.inventory.weapon["leftHand"].damage
+        elif(self.inventory.weapon["rightHand"] != None):
+            damageMin += self.inventory.weapon["rightHand"].damage
+            damageMax += self.inventory.weapon["rightHand"].damage
+
+        # Calculate the total armor
         totalArmor = self.armor
         for slot in self.inventory.armor:
             if(self.inventory.armor[slot] != None):
                 totalArmor += self.inventory.armor[slot].armor
         if(totalArmor > 90):
             totalArmor = 90
-        return self.showBars() + "\nDamages: {} - {}\nDodge: {} %\nParry: {} %\nCritical hit: {} %\nArmor: {} %\n".format(self.damageMin, self.damageMax, self.dodge, self.parry, self.criticalHit, totalArmor)
+        return self.showBars() + "\nDamages: {} - {}\nDodge: {} %\nParry: {} %\nCritical hit: {} %\nArmor: {} %\n".format(damageMin, damageMax, self.dodge, self.parry, self.criticalHit, totalArmor)
 
 
     def showInventory(self):
