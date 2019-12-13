@@ -27,8 +27,8 @@ le joueur obtient des pooints d'expériences, des gold ainsi que des items.
 
 Lors d'une intéraction avec un marchant, le joueur peut acheter des items ou en vendre.
 
+Le joueur a aussi la possibilité de quitter le jeu tou en sauvegardant ses statistiques et son inventaire.
 
 Axes d'amélioration:
 - Ajouter des sorts, d'items, de monstres et de types de marchants
-- Ajouter une base de données
 - Améliorer l'interface en console voir ajouter d'une interface graphique
