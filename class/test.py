@@ -8,6 +8,16 @@ def check(name):
         print(row)
         if(row[1] == name):
             isInDB = True 
+
+    for row in cursor.execute('SELECT * FROM inventory'):
+        print(row)
+
+    for row in cursor.execute('SELECT * FROM objects'):
+        print(row)
+
+    for row in cursor.execute('SELECT * FROM statistics'):
+        print(row)
+
     bdd.commit()
     bdd.close()
     print(isInDB)
@@ -18,7 +28,7 @@ def insertPlayerData(name, health, shield, dodge, parry, criticalHit, mana, dama
     bdd.commit()
     bdd.close()
 
-insertPlayerData("clem",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+#insertPlayerData("clem",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
-insertPlayerData("rodo",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+#insertPlayerData("rodo",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 check("rodo")

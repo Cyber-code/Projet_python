@@ -177,7 +177,7 @@ def getStatisticsData(id_player):
 def updatePlayerData(name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana):
     bdd = sqlite3.connect(database_url)
     cursor = bdd.cursor()
-    cursor.execute("""UPDATE `player` SET `health`=?,`shield`=?,`dodge`=?,`parry`=?,`criticalHit`=?,`mana`=?,`damageMin`=?,`damageMax`=?,`armor`=?,`xp`=?,`level`=?,`maxHealth`=?,`maxShield`=?,`maxMana`=? WHERE 'name'=?""",(health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana, name))
+    cursor.execute("""UPDATE player SET health=?, shield=?, dodge=?, parry=?, criticalHit=?, mana=?, damageMin=?, damageMax=?, armor=?, xp=?, level=?, maxHealth=?, maxShield=?, maxMana=? WHERE name=?""",(health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana, name))
     bdd.commit()
     bdd.close()
 
@@ -185,7 +185,7 @@ def updatePlayerData(name, health, shield, dodge, parry, criticalHit, mana, dama
 def updateInventoryData(id_player, gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet):
     bdd = sqlite3.connect(database_url)
     cursor = bdd.cursor()
-    cursor.execute("""UPDATE `inventory` SET `health`=?,`shield`=?,`dodge`=?,`parry`=?,`criticalHit`=?,`mana`=?,`damageMin`=?,`damageMax`=?,`armor`=?,`xp`=?,`level`=?,`maxHealth`=?,`maxShield`=?,`maxMana`=? WHERE 'id_player'=?""",(gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet, id_player))
+    cursor.execute("""UPDATE inventory SET gold=?,leftHand=?,rightHand=?,jewel1=?,jewel2=?,head=?,chest=?,arms=?,legs=?,feet=? WHERE id_player=?""",(gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet, id_player))
     bdd.commit()
     bdd.close()
 
@@ -193,14 +193,14 @@ def updateInventoryData(id_player, gold, leftHand, rightHand, jewel1, jewel2, he
 def updateObjectData(id_player, name):
     bdd = sqlite3.connect(database_url)
     cursor = bdd.cursor()
-    cursor.execute("""UPDATE `objects` SET `name`=? WHERE 'id_player'=?""",(name, id_player))
+    cursor.execute("""UPDATE objects SET name=? WHERE id_player=?""",(name, id_player))
     bdd.commit()
     bdd.close()
 
 def updateStatisticsData(id_player, monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled):
     bdd = sqlite3.connect(database_url)
     cursor = bdd.cursor()
-    cursor.execute("""UPDATE `statistics` SET `monstersKilled`=?,`merchantsMet`=?,`chestsFound`=?,`objectsBought`=?,`objectsSold`=?,`consumablesUsed`=?,`enderDragonsKilled`=? WHERE 'id_player'=?""",(monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled, id_player))
+    cursor.execute("""UPDATE statistics SET monstersKilled=?,merchantsMet=?,chestsFound=?,objectsBought=?,objectsSold=?,consumablesUsed=?,enderDragonsKilled=? WHERE id_player=?""",(monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled, id_player))
     bdd.commit()
     bdd.close()
 

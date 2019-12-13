@@ -18,6 +18,8 @@ class Battle(Interaction):
             action = False
             while(action == False):
                 (action, damages) = self.selectAction()
+            if(damages == 0):
+                return "exit"
             self.mob.getDamages(damages)
             print(self.mob.showBars())
 
@@ -68,9 +70,10 @@ class Battle(Interaction):
         print("8  - Show inventory")
         print("9  - Show statistics")
         print("10 - Show success")
+        print("11 - Save and exit")
 
         choice = str()
-        while(choice not in [str(i) for i in range(11)]):
+        while(choice not in [str(i) for i in range(12)]):
             choice = input("Your action: ")
 
         print("--------------------------------------------------")
@@ -152,6 +155,11 @@ class Battle(Interaction):
         # Show player's success
         elif(choice == 10):
             print(self.player.showSuccess())
+
+        # Save and exit
+        elif(choice == 11):
+            self.player.save()
+            return (True, 0)
         
         return (False, 0)
 

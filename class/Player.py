@@ -200,7 +200,8 @@ class Player(Character):
             legs = self.inventory.armor["legs"].libelle
         if(self.inventory.armor["feet"] != None):
             feet = self.inventory.armor["feet"].libelle
-            
+
+        print(self.maxHealth) 
         updatePlayerData(self.name, self.health, self.shield, self.dodge, self.parry, self.criticalHit, self.mana, self.damageMin, self.damageMax, self.armor, self.xp, self.level, self.maxHealth, self.maxShield, self.maxMana)
         updateStatisticsData(getId(self.name), self.statistics.monstersKilled, self.statistics.merchantsMet, self.statistics.chestsFound, self.statistics.objectsBought, self.statistics.objectsSold, self.statistics.consumablesUsed, self.statistics.enderDragonsKilled)
         updateInventoryData(getId(self.name), self.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)

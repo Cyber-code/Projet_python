@@ -22,7 +22,7 @@ def loadDB(player):
     player.armor = playerData[10]
     player.xp = playerData[11]
     player.level = playerData[12]
-    player.maxHealth = playerData[12]
+    player.maxHealth = playerData[13]
     player.maxShield = playerData[14]
     player.maxMana = playerData[15]
 
@@ -133,10 +133,6 @@ def main():
     if(not map.run()):
         print(player.showStatistics())
         print(player.showSuccess())
-        #player.save()
-        #print(getPlayerData(player.name))
-        #print(getInventoryData(getId(player.name)))
-        #print(getStatisticsData(getId(player.name)))
-        #print(getObjectData(getId(player.name)))
+        player.save()
         
 main()

@@ -13,7 +13,7 @@ class Transaction(Interaction):
         print("You meet a {}.".format(self.mob.name.lower()))
         print("You have {} gold.".format(self.player.inventory.gold))
         while(True):
-            if(self.selectAction()):
+            if(self.selectAction() in [True, "exit"]):
                 break
         
         print("\nYou leave the transaction.")
@@ -35,9 +35,10 @@ class Transaction(Interaction):
         print("8  - Show inventory")
         print("9  - Show statistics")
         print("10 - Show success")
+        print("11 - Save and exit")
 
         choice = str()
-        while(choice not in [str(i) for i in range(11)]):
+        while(choice not in [str(i) for i in range(12)]):
             choice = input("Your action: ")
 
         print("--------------------------------------------------")
@@ -96,6 +97,11 @@ class Transaction(Interaction):
         # Show player's success
         elif(choice == 10):
             print(self.player.showSuccess())
+
+        # Save and exit
+        elif(choice == 11):
+            self.player.save()
+            return "exit" # Leave the loop in the method run
         
         return False
 
