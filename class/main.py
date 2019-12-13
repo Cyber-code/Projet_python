@@ -8,48 +8,50 @@ from DBMineRPG import *
 
 def loadDB(player):
     print("Greating for coming back on Mine RPG !")
-    data = getPlayerData(player.name)
-    id_player = data[0]
-    player.name = data[1]
-    player.health = data[2]
-    player.shield = data[3]
-    player.dodge = data[4]
-    player.parry = data[5]
-    player.criticalHit = data[6]
-    player.mana = data[7]
-    player.damageMin = data[8]
-    player.damageMax = data[9]
-    player.armor = data[10]
-    player.xp = data[11]
-    player.level = data[12]
-    player.maxHealth = data[12]
-    player.maxShield = data[14]
-    player.maxMana = data[15]
+    playerData = getPlayerData(player.name)
+    id_player = playerData[0]
+    player.name = playerData[1]
+    player.health = playerData[2]
+    player.shield = playerData[3]
+    player.dodge = playerData[4]
+    player.parry = playerData[5]
+    player.criticalHit = playerData[6]
+    player.mana = playerData[7]
+    player.damageMin = playerData[8]
+    player.damageMax = playerData[9]
+    player.armor = playerData[10]
+    player.xp = playerData[11]
+    player.level = playerData[12]
+    player.maxHealth = playerData[12]
+    player.maxShield = playerData[14]
+    player.maxMana = playerData[15]
 
-    data2 = getInventoryData(id_player)
-    player.inventory.gold = data2[1]
-    player.inventory.weapon["leftHand"] = generateWeapon(name=data2[2]) if data2[2] != "None" else None
-    player.inventory.weapon["rightHand"] = generateWeapon(name=data2[3]) if data2[3] != "None" else None
-    player.inventory.jewels["jewel1"] = generateJewel(name=data2[4]) if data2[4] != "None" else None
-    player.inventory.jewels["jewel2"] = generateJewel(name=data2[5]) if data2[5] != "None" else None
-    player.inventory.armor["head"] = generateArmor(name=data2[6]) if data2[6] != "None" else None
-    player.inventory.armor["chest"] = generateArmor(name=data2[7]) if data2[7] != "None" else None
-    player.inventory.armor["arms"] = generateArmor(name=data2[8]) if data2[8] != "None" else None
-    player.inventory.armor["legs"] = generateArmor(name=data2[9]) if data2[9] != "None" else None
-    player.inventory.armor["feet"] = generateArmor(name=data2[10]) if data2[10] != "None" else None
+    inventoryData = getInventoryData(id_player)
+    player.inventory.gold = inventoryData[1]
+    player.inventory.weapon["leftHand"] = generateWeapon(name=inventoryData[2]) if inventoryData[2] != "None" else None
+    player.inventory.weapon["rightHand"] = generateWeapon(name=inventoryData[3]) if inventoryData[3] != "None" else None
+    player.inventory.jewels["jewel1"] = generateJewel(name=inventoryData[4]) if inventoryData[4] != "None" else None
+    player.inventory.jewels["jewel2"] = generateJewel(name=inventoryData[5]) if inventoryData[5] != "None" else None
+    player.inventory.armor["head"] = generateArmor(name=inventoryData[6]) if inventoryData[6] != "None" else None
+    player.inventory.armor["chest"] = generateArmor(name=inventoryData[7]) if inventoryData[7] != "None" else None
+    player.inventory.armor["arms"] = generateArmor(name=inventoryData[8]) if inventoryData[8] != "None" else None
+    player.inventory.armor["legs"] = generateArmor(name=inventoryData[9]) if inventoryData[9] != "None" else None
+    player.inventory.armor["feet"] = generateArmor(name=inventoryData[10]) if inventoryData[10] != "None" else None
+    
+    """
+    objectsData = getObjectData(id_player)
+    for obj in objectsData:
+        player.inventory.objects.append(generateConsumable(obj[1]))
+    """
 
-    data3 = getObjectData(id_player)
-    for obj in data3:
-        player.inventory.objects.append(obj)
-
-    data4 = getStatisticsData(id_player)
-    player.statistics.monstersKilled = data4[1]
-    player.statistics.merchantsMet = data4[2]
-    player.statistics.chestsFound = data4[3]
-    player.statistics.objectsBought = data4[4]
-    player.statistics.objectsSold = data4[5]
-    player.statistics.consumablesUsed = data4[6]
-    player.statistics.enderDragonsKilled = data4[7]
+    statsData = getStatisticsData(id_player)
+    player.statistics.monstersKilled = statsData[1]
+    player.statistics.merchantsMet = statsData[2]
+    player.statistics.chestsFound = statsData[3]
+    player.statistics.objectsBought = statsData[4]
+    player.statistics.objectsSold = statsData[5]
+    player.statistics.consumablesUsed = statsData[6]
+    player.statistics.enderDragonsKilled = statsData[7]
 
     return player
 
@@ -88,9 +90,10 @@ def insertPlayerToDB(player):
     insertPlayerData(player.name, player.health, player.shield, player.dodge, player.parry, player.criticalHit, player.mana, player.damageMin, player.damageMax, player.armor, player.xp, player.level, player.maxHealth, player.maxShield, player.maxMana)
     insertInventoryData(getId(player.name), player.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
     insertStatisticsData(getId(player.name), player.statistics.monstersKilled, player.statistics.merchantsMet, player.statistics.chestsFound, player.statistics.objectsBought, player.statistics.objectsSold, player.statistics.consumablesUsed, player.statistics.enderDragonsKilled)
+    """
     for obj in player.inventory.objects:
         insertObjectData(getId(player.name), obj.libelle)
-
+    """
     # The player choose the difficulty
     print("\nSelect the difficulty:")
     print("1 - Easy")
@@ -128,10 +131,9 @@ def main():
     # Launching of the game
     map = Map(player)
     if(not map.run()):
-        print("Game Over !")
         print(player.showStatistics())
         print(player.showSuccess())
-
+        #player.save()
         #print(getPlayerData(player.name))
         #print(getInventoryData(getId(player.name)))
         #print(getStatisticsData(getId(player.name)))

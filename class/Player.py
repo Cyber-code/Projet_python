@@ -170,3 +170,37 @@ class Player(Character):
             self.success["consumer"].unlock = True
         if(self.statistics.enderDragonsKilled > 0):
             self.success["the_end"].unlock = True
+
+    def save(self):
+        leftHand="None" 
+        rightHand="None"
+        jewel1="None"
+        jewel2="None"
+        head="None"
+        chest="None" 
+        arms="None"
+        legs="None"
+        feet="None"
+
+        if(self.inventory.weapon["leftHand"] != None):
+            leftHand = self.inventory.weapon["leftHand"].libelle
+        if(self.inventory.weapon["rightHand"] != None):
+            rightHand = self.inventory.weapon["rightHand"].libelle
+        if(self.inventory.jewels["jewel1"] != None):
+            jewel1 = self.inventory.jewels["jewel1"].libelle
+        if(self.inventory.jewels["jewel2"] != None):
+            jewel2 = self.inventory.jewels["jewel2"].libelle
+        if(self.inventory.armor["head"] != None):
+            head = self.inventory.armor["head"].libelle
+        if(self.inventory.armor["chest"] != None):
+            chest = self.inventory.armor["chest"].libelle
+        if(self.inventory.armor["arms"] != None):
+            arms = self.inventory.armor["arms"].libelle
+        if(self.inventory.armor["legs"] != None):
+            legs = self.inventory.armor["legs"].libelle
+        if(self.inventory.armor["feet"] != None):
+            feet = self.inventory.armor["feet"].libelle
+            
+        updatePlayerData(self.name, self.health, self.shield, self.dodge, self.parry, self.criticalHit, self.mana, self.damageMin, self.damageMax, self.armor, self.xp, self.level, self.maxHealth, self.maxShield, self.maxMana)
+        updateStatisticsData(getId(self.name), self.statistics.monstersKilled, self.statistics.merchantsMet, self.statistics.chestsFound, self.statistics.objectsBought, self.statistics.objectsSold, self.statistics.consumablesUsed, self.statistics.enderDragonsKilled)
+        updateInventoryData(getId(self.name), self.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
