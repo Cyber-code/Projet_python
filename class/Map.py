@@ -29,7 +29,6 @@ class Map:
         """ This method generates rooms while the player is alive. """
         while(True):
             room = self.generateRoom()
-            print(self.player.maxHealth)
             self.player.updateSuccess()
             if(room.run() in [False, "exit"]):
                 self.player.updateSuccess()

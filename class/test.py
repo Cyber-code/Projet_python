@@ -28,7 +28,23 @@ def insertPlayerData(name, health, shield, dodge, parry, criticalHit, mana, dama
     bdd.commit()
     bdd.close()
 
-#insertPlayerData("clem",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+def insertObjectData(id_player, name):
+    bdd = sqlite3.connect("DBMineRPG.db")
+    cursor = bdd.cursor()
+    cursor.execute("""INSERT INTO objects(id_player, name) VALUES(?, ?)""", (id_player, name))
+    bdd.commit()
+    bdd.close()
 
+def deleteObjectData(id_player):
+    bdd = sqlite3.connect("DBMineRPG.db")
+    cursor = bdd.cursor()
+    cursor.execute("""DELETE FROM objects WHERE id_player=?""", (id_player,))
+    bdd.commit()
+    bdd.close()
+
+#insertPlayerData("clem",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 #insertPlayerData("rodo",0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+#insertObjectData(1, "wooden_sword")
+deleteObjectData(1)
 check("rodo")

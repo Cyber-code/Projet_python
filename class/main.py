@@ -38,11 +38,16 @@ def loadDB(player):
     player.inventory.armor["legs"] = generateArmor(name=inventoryData[9]) if inventoryData[9] != "None" else None
     player.inventory.armor["feet"] = generateArmor(name=inventoryData[10]) if inventoryData[10] != "None" else None
     
-    """
     objectsData = getObjectData(id_player)
     for obj in objectsData:
-        player.inventory.objects.append(generateConsumable(obj[1]))
-    """
+        if(obj[1] in ["potion_healing","potion_mana","piece_shield","potion_regeneration","book_knowledge"]):
+            player.inventory.objects.append(generateConsumable(obj[1]))
+        elif(obj[1] in ["leather_helmet","leather_chestplate","leather_arms_protection","leather_leggings","leather_boots","golden_helmet","golden_chestplate","golden_arms_protection","golden_leggings","golden_boots","chainmail_helmet","chainmail_chestplate","chainmail_arms_protection","chainmail_leggings","chainmail_boots","iron_helmet","iron_chestplate","iron_arms_protection","iron_leggings","iron_boots","diamond_helmet","diamond_chestplate","diamond_arms_protection","diamond_leggings","diamond_boots"]):
+            player.inventory.objects.append(generateArmor(obj[1]))
+        elif(obj[1] in ["strenght_necklace","resistance_necklace","anticipation_necklace","health_necklace"]):
+            player.inventory.objects.append(generateJewel(obj[1]))
+        elif(obj[1] in ["wooden_sword","goldden_sword","stone_sword","iron_sword","diamond_sword","bow","crossbow"]):
+            player.inventory.objects.append(generateWeapon(obj[1]))
 
     statsData = getStatisticsData(id_player)
     player.statistics.monstersKilled = statsData[1]
@@ -90,10 +95,7 @@ def insertPlayerToDB(player):
     insertPlayerData(player.name, player.health, player.shield, player.dodge, player.parry, player.criticalHit, player.mana, player.damageMin, player.damageMax, player.armor, player.xp, player.level, player.maxHealth, player.maxShield, player.maxMana)
     insertInventoryData(getId(player.name), player.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
     insertStatisticsData(getId(player.name), player.statistics.monstersKilled, player.statistics.merchantsMet, player.statistics.chestsFound, player.statistics.objectsBought, player.statistics.objectsSold, player.statistics.consumablesUsed, player.statistics.enderDragonsKilled)
-    """
-    for obj in player.inventory.objects:
-        insertObjectData(getId(player.name), obj.libelle)
-    """
+    
     # The player choose the difficulty
     print("\nSelect the difficulty:")
     print("1 - Easy")
@@ -109,8 +111,11 @@ def insertPlayerToDB(player):
     if(difficulty < 4):
         player.addItem(generateConsumable(name="potion_healing"))
         player.addItem(generateConsumable(name="potion_mana"))
+        insertObjectData(getId(player.name), "potion_healing")
+        insertObjectData(getId(player.name), "potion_mana")
     if(difficulty < 3):
         player.addItem(generateWeapon(name="wooden_sword"))
+        insertObjectData(getId(player.name), "wooden_sword")
     if(difficulty < 2):
         player.addGold(10)
 
@@ -131,8 +136,8 @@ def main():
     # Launching of the game
     map = Map(player)
     if(not map.run()):
-        print(player.showStatistics())
-        print(player.showSuccess())
+        #print(player.showStatistics())
+        #print(player.showSuccess())
         player.save()
         
 main()

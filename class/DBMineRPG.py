@@ -82,6 +82,13 @@ def createDB():
     bdd.commit()
     bdd.close()
 
+def deleteObjectData(id_player):
+    bdd = sqlite3.connect(database_url)
+    cursor = bdd.cursor()
+    cursor.execute("""DELETE FROM objects WHERE id_player=?""",(id_player,))
+    bdd.commit()
+    bdd.close()
+
 
 def insertPlayerData(name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana):
     bdd = sqlite3.connect(database_url)
@@ -154,13 +161,13 @@ def getInventoryData(id_player):
 def getObjectData(id_player):
     bdd = sqlite3.connect(database_url)
     cursor = bdd.cursor()
-    data = [tuple]
-    for row in cursor.execute('SELECT * FROM objects'):
+    data = []
+    for row in cursor.execute('SELECT * FROM objects WHERE id_player=?',(id_player,)):
         if(row[0] == id_player):
             data.append(row)
     bdd.commit()
     bdd.close()
-    return []
+    return data
 
 def getStatisticsData(id_player):
     bdd = sqlite3.connect(database_url)
