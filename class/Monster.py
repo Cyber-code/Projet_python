@@ -4,7 +4,7 @@ from Consumable import generateConsumable
 from Weapon import generateWeapon
 from Armor import generateArmor
 from Jewels import generateJewel
-from random import randint, expovariate
+from random import randint, expovariate, gauss
 
 class Monster(Character):
     """ Monster class instantiate a monster object who will fight the player. """
@@ -16,7 +16,7 @@ class Monster(Character):
 
     def dropItems(self):
         """ Return a tuple containing monster's amount of gold and xp and a chest. """
-        items = (self.xp, self.inventory.gold, generateChest())
+        items = (self.xp, int(gauss(self.xp, 2)), generateChest())
         # Clear the monster's inventory
         self.inventory.gold = 0
         self.inventory.objects = []
