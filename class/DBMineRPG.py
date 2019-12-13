@@ -1,5 +1,26 @@
 import sqlite3
 
+def checkPlayer(name):
+    bdd = sqlite3.connect('DBMineRPG.db')
+    cursor = bdd.cursor()
+    isInDB = False
+    for row in cursor.execute('SELECT * FROM player'):
+        if(row[1] == name):
+            isInDB = True
+    bdd.commit()
+    bdd.close()
+    return isInDB
+
+def clearDB():
+    bdd = sqlite3.connect('DBMineRPG.db')
+    cursor = bdd.cursor()
+    cursor.execute('DELETE FROM player')
+    cursor.execute('DELETE FROM inventory')
+    cursor.execute('DELETE FROM objects')
+    cursor.execute('DELETE FROM statistics')
+    bdd.commit()
+    bdd.close()
+
 def createDB():
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
@@ -95,15 +116,10 @@ def insertStatisticsData(id_player, monstersKilled, merchantsMet, chestsFound, o
 def getPlayerData(name):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    """
     data = tuple()
     for row in cursor.execute('SELECT * FROM player'):
         if(row[1] == name):
             data = row
-    """
-    data = []
-    for row in cursor.execute('SELECT * FROM player'):
-        data.append(row)
     bdd.commit()
     bdd.close()
     return data
@@ -124,12 +140,10 @@ def getId(name):
 def getInventoryData(id_player):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    """
     data = tuple()
     for row in cursor.execute('SELECT * FROM inventory'):
         if(row[0] == id_player):
             data = row
-    """
     data = []
     for row in cursor.execute('SELECT * FROM inventory'):
         data.append(row)
@@ -141,12 +155,10 @@ def getInventoryData(id_player):
 def getObjectData(id_player):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    """
     data = tuple()
     for row in cursor.execute('SELECT * FROM objects'):
         if(row[0] == id_player):
             data = row
-    """
     data = []
     for row in cursor.execute('SELECT * FROM objects'):
         data.append(row)
@@ -157,27 +169,15 @@ def getObjectData(id_player):
 def getStatisticsData(id_player):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    """
     data = []
     for row in cursor.execute('SELECT * FROM statistics'):
         if(row[0] == id_player):
             data.append(row)
-    """
     data = []
     for row in cursor.execute('SELECT * FROM statistics'):
         data.append(row)
     bdd.commit()
     bdd.close()
     return data
-
-def clearDB():
-    bdd = sqlite3.connect('DBMineRPG.db')
-    cursor = bdd.cursor()
-    cursor.execute('DELETE FROM player')
-    cursor.execute('DELETE FROM inventory')
-    cursor.execute('DELETE FROM objects')
-    cursor.execute('DELETE FROM statistics')
-    bdd.commit()
-    bdd.close()
 
 clearDB()
