@@ -152,13 +152,13 @@ def getInventoryData(id_player):
 def getObjectData(id_player):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    data = tuple()
+    data = [tuple]
     for row in cursor.execute('SELECT * FROM objects'):
         if(row[0] == id_player):
-            data = row
+            data.append(row)
     bdd.commit()
     bdd.close()
-    return data
+    return []
 
 def getStatisticsData(id_player):
     bdd = sqlite3.connect('DBMineRPG.db')
@@ -172,10 +172,10 @@ def getStatisticsData(id_player):
     return data
 
 
-def updatePlayerData(health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana):
+def updatePlayerData(name, health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    cursor.execute("""UPDATE `player` SET `health`=?,`shield`=?,`dodge`=?,`parry`=?,`criticalHit`=?,`mana`=?,`damageMin`=?,`damageMax`=?,`armor`=?,`xp`=?,`level`=?,`maxHealth`=?,`maxShield`=?,`maxMana`=?""",(health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana))
+    cursor.execute("""UPDATE `player` SET `health`=?,`shield`=?,`dodge`=?,`parry`=?,`criticalHit`=?,`mana`=?,`damageMin`=?,`damageMax`=?,`armor`=?,`xp`=?,`level`=?,`maxHealth`=?,`maxShield`=?,`maxMana`=? WHERE 'name'=?""",(health, shield, dodge, parry, criticalHit, mana, damageMin, damageMax, armor, xp, level, maxHealth, maxShield, maxMana, name))
     bdd.commit()
     bdd.close()
 
@@ -183,7 +183,7 @@ def updatePlayerData(health, shield, dodge, parry, criticalHit, mana, damageMin,
 def updateInventoryData(id_player, gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    cursor.execute("""INSERT INTO inventory(id_player, gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",(id_player, gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet))
+    cursor.execute("""UPDATE `inventory` SET `health`=?,`shield`=?,`dodge`=?,`parry`=?,`criticalHit`=?,`mana`=?,`damageMin`=?,`damageMax`=?,`armor`=?,`xp`=?,`level`=?,`maxHealth`=?,`maxShield`=?,`maxMana`=? WHERE 'id_player'=?""",(gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet, id_player))
     bdd.commit()
     bdd.close()
 
@@ -191,14 +191,14 @@ def updateInventoryData(id_player, gold, leftHand, rightHand, jewel1, jewel2, he
 def updateObjectData(id_player, name):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    cursor.execute("""INSERT INTO objects(id_player, name) VALUES(?, ?)""", (id_player, name))
+    cursor.execute("""UPDATE `objects` SET `name`=? WHERE 'id_player'=?""",(name, id_player))
     bdd.commit()
     bdd.close()
 
 def updateStatisticsData(id_player, monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled):
     bdd = sqlite3.connect('DBMineRPG.db')
     cursor = bdd.cursor()
-    cursor.execute("""INSERT INTO statistics(id_player, monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled) VALUES(?, ?, ?, ?, ?, ?, ?, ?)""",(id_player, monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled))
+    cursor.execute("""UPDATE `statistics` SET `monstersKilled`=?,`merchantsMet`=?,`chestsFound`=?,`objectsBought`=?,`objectsSold`=?,`consumablesUsed`=?,`enderDragonsKilled`=? WHERE 'id_player'=?""",(monstersKilled, merchantsMet, chestsFound, objectsBought, objectsSold, consumablesUsed, enderDragonsKilled, id_player))
     bdd.commit()
     bdd.close()
 
