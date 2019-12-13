@@ -16,10 +16,10 @@ class Battle(Interaction):
             
             # Player attacks the monster
             action = False
-            while(action == False):
+            while(action != True):
                 (action, damages) = self.selectAction()
-            if(damages == 0):
-                return "exit"
+                if(action == "exit"):
+                    return "exit"
             self.mob.getDamages(damages)
             print(self.mob.showBars())
 
@@ -159,7 +159,7 @@ class Battle(Interaction):
         # Save and exit
         elif(choice == 11):
             self.player.save()
-            return (True, 0)
+            return ("exit", 0)
         
         return (False, 0)
 
