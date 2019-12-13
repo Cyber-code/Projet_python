@@ -10,6 +10,8 @@ def main():
     createDB() # Create the Data Base
     name = input("Enter your player's name : ")
     player = Player(name=name)
+
+    # Checking of the existence of the player
     if(checkPlayer(name)):
         data = getPlayerData(name)
         id_player = data[0]
@@ -82,7 +84,7 @@ def main():
             legs = player.inventory.armor["legs"].libelle
         if(player.inventory.armor["feet"] != None):
             feet = player.inventory.armor["feet"].libelle
-            
+
         insertPlayerData(player.name, player.health, player.shield, player.dodge, player.parry, player.criticalHit, player.mana, player.damageMin, player.damageMax, player.armor, player.xp, player.level, player.maxHealth, player.maxShield, player.maxMana)
         insertInventoryData(getId(player.name), player.inventory.gold, leftHand, rightHand, jewel1, jewel2, head, chest, arms, legs, feet)
         insertStatisticsData(getId(player.name), player.statistics.monstersKilled, player.statistics.merchantsMet, player.statistics.chestsFound, player.statistics.objectsBought, player.statistics.objectsSold, player.statistics.consumablesUsed, player.statistics.enderDragonsKilled)
