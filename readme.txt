@@ -29,6 +29,6 @@ Lors d'une intéraction avec un marchant, le joueur peut acheter des items ou en
 
 
 Axes d'amélioration:
-- Ajout de sorts, d'items, de monstres et de types de marchants
-- Ajout d'une base de données
-- Ajout d'une interface graphique
+- Ajouter des sorts, d'items, de monstres et de types de marchants
+- Ajouter une base de données
+- Améliorer l'interface en console voir ajouter d'une interface graphique

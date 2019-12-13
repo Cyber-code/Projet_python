@@ -3,6 +3,7 @@ from Inventory import Inventory
 from math import sqrt
 from Statistics import Statistics
 from Success import Success
+from DBMineRPG import *
 
 class Player(Character):
     """ Player class instantiate a player object controled by the user. """
