@@ -169,3 +169,15 @@ def getStatisticsData(id_player):
     bdd.commit()
     bdd.close()
     return data
+
+def clearDB():
+    bdd = sqlite3.connect('DBMineRPG.db')
+    cursor = bdd.cursor()
+    cursor.execute('DELETE FROM player')
+    cursor.execute('DELETE FROM inventory')
+    cursor.execute('DELETE FROM objects')
+    cursor.execute('DELETE FROM statistics')
+    bdd.commit()
+    bdd.close()
+
+clearDB()
