@@ -1,5 +1,5 @@
 from Equipement import Equipement
-from random import randint
+from random import randint, expovariate
 
 class Armor(Equipement):
     """ 
@@ -24,59 +24,59 @@ class Armor(Equipement):
 def generateArmor(name=""):
     """ Return an Armor object. """
     if(name == "leather_helmet"):
-        return Armor(name="Leather Helmet", value=10, armor=2, armorType="head")
+        return Armor(name="Leather Helmet", value=100, armor=2, armorType="head")
     elif(name == "leather_chestplate"):
-        return Armor(name="Leather Chestplate", value=10, armor=10, armorType="chest")
+        return Armor(name="Leather Chestplate", value=100, armor=10, armorType="chest")
     elif(name == "leather_arms_protection"):
-        return Armor(name="Leather Arms Protection", value=10, armor=4, armorType="arms")
+        return Armor(name="Leather Arms Protection", value=100, armor=4, armorType="arms")
     elif(name == "leather_leggings"):
-        return Armor(name="Leather Leggings", value=10, armor=6, armorType="legs")
+        return Armor(name="Leather Leggings", value=100, armor=6, armorType="legs")
     elif(name == "leather_boots"):
-        return Armor(name="Leather Boots", value=10, armor=2, armorType="feet")
+        return Armor(name="Leather Boots", value=100, armor=2, armorType="feet")
 
     elif(name == "golden_helmet"):
-        return Armor(name="Golden Helmet", value=20, armor=6, armorType="head")
+        return Armor(name="Golden Helmet", value=500, armor=6, armorType="head")
     elif(name == "golden_chestplate"):
-        return Armor(name="Golden Chestplate", value=20, armor=18, armorType="chest")
+        return Armor(name="Golden Chestplate", value=500, armor=18, armorType="chest")
     elif(name == "golden_arms_protection"):
-        return Armor(name="Golden Arms Protection", value=20, armor=8, armorType="arms")
+        return Armor(name="Golden Arms Protection", value=500, armor=8, armorType="arms")
     elif(name == "golden_leggings"):
-        return Armor(name="Golden Leggings", value=20, armor=10, armorType="legs")
+        return Armor(name="Golden Leggings", value=500, armor=10, armorType="legs")
     elif(name == "golden_boots"):
-        return Armor(name="Golden Boots", value=20, armor=2, armorType="feet")
+        return Armor(name="Golden Boots", value=500, armor=2, armorType="feet")
 
     elif(name == "chainmail_helmet"):
-        return Armor(name="Chainmail Helmet", value=50, armor=6, armorType="head")
+        return Armor(name="Chainmail Helmet", value=1000, armor=6, armorType="head")
     elif(name == "chainmail_chestplate"):
-        return Armor(name="Chainmail Chestplate", value=50, armor=18, armorType="chest")
+        return Armor(name="Chainmail Chestplate", value=1000, armor=18, armorType="chest")
     elif(name == "chainmail_arms_protection"):
-        return Armor(name="Chainmail Arms Protection", value=50, armor=10, armorType="arms")
+        return Armor(name="Chainmail Arms Protection", value=1000, armor=10, armorType="arms")
     elif(name == "chainmail_leggings"):
-        return Armor(name="Chainmail Leggings", value=50, armor=14, armorType="legs")
+        return Armor(name="Chainmail Leggings", value=1000, armor=14, armorType="legs")
     elif(name == "chainmail_boots"):
-        return Armor(name="Chainmail Boots", value=50, armor=2, armorType="feet")
+        return Armor(name="Chainmail Boots", value=1000, armor=2, armorType="feet")
 
     elif(name == "iron_helmet"):
-        return Armor(name="Iron Helmet", value=100, armor=6, armorType="head")
+        return Armor(name="Iron Helmet", value=2000, armor=6, armorType="head")
     elif(name == "iron_chestplate"):
-        return Armor(name="Iron Chestplate", value=100, armor=22, armorType="chest")
+        return Armor(name="Iron Chestplate", value=2000, armor=22, armorType="chest")
     elif(name == "iron_arms_protection"):
-        return Armor(name="Iron Arms Protection", value=100, armor=12, armorType="arms")
+        return Armor(name="Iron Arms Protection", value=2000, armor=12, armorType="arms")
     elif(name == "iron_leggings"):
-        return Armor(name="Iron Leggings", value=100, armor=18, armorType="legs")
+        return Armor(name="Iron Leggings", value=2000, armor=18, armorType="legs")
     elif(name == "iron_boots"):
-        return Armor(name="Iron Boots", value=100, armor=6, armorType="feet")
+        return Armor(name="Iron Boots", value=2000, armor=6, armorType="feet")
     
     elif(name == "diamond_helmet"):
-        return Armor(name="Diamond Helmet", value=200, armor=10, armorType="head")
+        return Armor(name="Diamond Helmet", value=5000, armor=10, armorType="head")
     elif(name == "diamond_chestplate"):
-        return Armor(name="Diamond Chestplate", value=200, armor=30, armorType="chest")
+        return Armor(name="Diamond Chestplate", value=5000, armor=30, armorType="chest")
     elif(name == "diamond_arms_protection"):
-        return Armor(name="Diamond Arms Protection", value=200, armor=16, armorType="arms")
+        return Armor(name="Diamond Arms Protection", value=5000, armor=16, armorType="arms")
     elif(name == "diamond_leggings"):
-        return Armor(name="Diamond Leggings", value=200, armor=22, armorType="legs")
+        return Armor(name="Diamond Leggings", value=5000, armor=22, armorType="legs")
     elif(name == "diamond_boots"):
-        return Armor(name="Diamond Boots", value=200, armor=10, armorType="feet")
+        return Armor(name="Diamond Boots", value=5000, armor=10, armorType="feet")
     else:
         items = ["leather_helmet","leather_chestplate","leather_arms_protection","leather_leggings","leather_boots","golden_helmet","golden_chestplate","golden_arms_protection","golden_leggings","golden_boots","chainmail_helmet","chainmail_chestplate","chainmail_arms_protection","chainmail_leggings","chainmail_boots","iron_helmet","iron_chestplate","iron_arms_protection","iron_leggings","iron_boots","diamond_helmet","diamond_chestplate","diamond_arms_protection","diamond_leggings","diamond_boots"]
-        return generateArmor(name=items[randint(0,len(items)-1)])
+        return generateArmor(name=items[int(expovariate(1/(len(items)//4))) % len(items)])

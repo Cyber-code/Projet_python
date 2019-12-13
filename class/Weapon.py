@@ -1,5 +1,5 @@
 from Equipement import Equipement
-from random import randint
+from random import randint, expovariate
 
 """ Weapon class instantiate weapon object which is used to increase damage stat of the player"""
 class Weapon(Equipement):
@@ -16,17 +16,17 @@ def generateWeapon(name=""):
     if(name == "wooden_sword"):
         return Weapon(name="Wooden Sword", value = 10, damage=4)
     elif(name == "goldden_sword"):
-        return Weapon(name="Golden Sword", value = 80, damage=4)
+        return Weapon(name="Golden Sword", value = 1000, damage=4)
     elif(name == "stone_sword"):
-        return Weapon(name="Stone Sword", value = 20, damage=5)
+        return Weapon(name="Stone Sword", value = 500, damage=5)
     elif(name == "iron_sword"):
-        return Weapon(name="Iron Sword", value = 50, damage=6)
+        return Weapon(name="Iron Sword", value = 2000, damage=6)
     elif(name == "diamond_sword"):
-        return Weapon(name="Diamond Sword", value = 100, damage=7)
+        return Weapon(name="Diamond Sword", value = 5000, damage=7)
     elif(name == "bow"):
-        return Weapon(name="Bow", value = 200, damage=9)
+        return Weapon(name="Bow", value = 7500, damage=9)
     elif(name == "crossbow"):
-        return Weapon(name="Crossbow", value = 300, damage=10)
+        return Weapon(name="Crossbow", value = 10000, damage=10)
     else:
         items = ["wooden_sword","goldden_sword","stone_sword","iron_sword","diamond_sword","bow","crossbow"]
-        return generateWeapon(name=items[randint(0,len(items)-1)])
+        return generateWeapon(name=items[int(expovariate(1/(len(items)//4))) % len(items)])

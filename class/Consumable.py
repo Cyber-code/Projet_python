@@ -27,11 +27,12 @@ def generateConsumable(name=""):
     elif(name == "potion_mana"):
         return Consumable(name="Potion of Mana", value=2, mana=5)
     elif(name == "potion_regeneration"):
-        return Consumable(name="Potion of Regeneration", value=10, health=1000, shield=1000, mana=1000)
+        return Consumable(name="Potion of Regeneration", value=100, health=1000, shield=1000, mana=1000)
     elif(name == "piece_shield"):
         return Consumable(name="Piece of Shield", value=2, shield=5)
     elif(name == "book_knowledge"):
-        return Consumable(name="Book of Knowledge", value=100, xp=100)
+        return Consumable(name="Book of Knowledge", value=200, xp=100)
     else:
-        items = ["potion_healing","potion_mana","potion_regeneration","piece_shield","book_knowledge"]
+        items = ["potion_healing","potion_mana","piece_shield","potion_regeneration","book_knowledge"]
+
         return generateConsumable(name=items[randint(0,len(items)-1)])

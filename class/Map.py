@@ -1,7 +1,7 @@
 from Room import Room
 from Merchant import generateMerchant
 from Monster import generateMonster
-from random import randint
+from random import randint, expovariate
 
 class Map:
     """ Map class instantiate a map object where rooms are generated. """
@@ -13,8 +13,9 @@ class Map:
         rnd = randint(0,99)
         # 70 % of chance to enter in a battle
         if(rnd < 70):
+            # The generation of monster follow an exponential law i.e monsters who have their name are in the left of the list below have more chance to be generated.
             name = ["zombie","bowman_skeleton","swordman_skeleton","spider","enderman","zombie_pigman","ghast","blaze","ender_dragon"]
-            mob = generateMonster(name=name[randint(0,len(name)-1)])
+            mob = generateMonster(name=name[int(expovariate(1/(len(name)//4))) % len(name)])
         # 20 % of chance to meet a merchant
         elif(rnd < 90):
             name = ["consumable_merchant","jewels_merchant","weapon_merchant","armor_merchant"]
